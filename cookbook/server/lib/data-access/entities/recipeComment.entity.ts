@@ -5,29 +5,25 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
+import { Recipe } from './recipe.entity';
 import { User } from './user.entity';
 
-@Entity({ name: 'Cookbook' })
-export class Cookbook {
+@Entity({ name: 'Recipe_Comment' })
+export class RecipeComment {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ nullable: false })
-  title: string;
+  text: string;
 
   @Column({ nullable: false })
-  description: string;
-
-  @Column({ default: 'images/photo-mask.png' })
-  image: string;
-
-  @Column('simple-array', { nullable: true })
-  tags: string[];
-
-  @Column({ default: 0 })
-  views: number;
+  date: string;
 
   @OneToOne(() => User)
   @JoinColumn()
   User: User;
+
+  @OneToOne(() => Recipe)
+  @JoinColumn()
+  Recipe: Recipe;
 }

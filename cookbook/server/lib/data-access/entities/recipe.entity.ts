@@ -1,28 +1,42 @@
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  OneToOne,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
+import { Cookbook } from './cookbook.entity';
+import { User } from './user.entity';
 
-@Entity()
+@Entity({ name: 'Recipe' })
 export class Recipe {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
-  @Column()
+  @Column({ nullable: false })
   title: string;
 
-  @Column()
+  @Column({ nullable: false })
   description: string;
 
-  @Column()
+  @Column({ default: 'images/photo-mask.png' })
   image: string;
 
-  @Column()
-  directions: string;
+  @Column('simple-array', { nullable: false })
+  directions: string[];
 
-  @Column()
-  ingredients: string;
+  @Column('simple-array', { nullable: false })
+  ingredients: string[];
 
-  @Column()
+  @Column({ nullable: false })
   time: number;
 
-  @Column()
+  @Column({ default: 0 })
   views: number;
+
+  @OneToOne(() => User)
+  @JoinColumn()
+  User: User;
 }

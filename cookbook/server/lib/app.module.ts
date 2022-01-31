@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CookbooksModule } from './modules/cookbooks.module';
-import { RecipesModule } from './modules/recipes.module';
-import { UsersModule } from './modules/users.module';
+import { CookbookModule } from './modules/cookbook.module';
+import { RecipeModule } from './modules/recipe.module';
+import { UserModule } from './modules/user.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       autoLoadEntities: true,
     }),
-    CookbooksModule,
-    RecipesModule,
-    UsersModule,
+    CookbookModule,
+    RecipeModule,
+    UserModule,
   ],
 })
 export class AppModule {}

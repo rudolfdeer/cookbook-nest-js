@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Delete, Put, Param } from '@nestjs/common';
-import { RecipesService } from '../services/recipes.service';
+import { CookbookService } from '../services/cookbook.service';
 
-@Controller('recipes')
-export class RecipesController {
-  constructor(private readonly recipesService: RecipesService) {}
+@Controller('cookbooks')
+export class CookbookController {
+  constructor(private readonly cookbooksService: CookbookService) {}
 
   @Get()
   findAll() {

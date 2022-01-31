@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'User' })
 export class User {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({ nullable: false })
   title: string;
@@ -17,9 +17,9 @@ export class User {
   @Column({ nullable: false })
   password: string;
 
-  @Column()
+  @Column({ default: 'images/photo-mask.png' })
   image: string;
 
-  @Column()
+  @Column({ default: 'No bio.' })
   bio: string;
 }

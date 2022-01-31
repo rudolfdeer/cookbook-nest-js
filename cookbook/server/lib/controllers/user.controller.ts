@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Delete, Put, Param } from '@nestjs/common';
-import { UsersService } from '../services/users.service';
+import { UserService } from '../services/user.service';
 
 @Controller('user')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+export class UserController {
+  constructor(private readonly usersService: UserService) {}
 
   @Get()
   findLoggedIn() {

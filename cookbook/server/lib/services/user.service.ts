@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Recipe } from 'lib/data-access/entities/recipe.entity';
+import { User } from 'lib/data-access/entities/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class RecipesService {
+export class UserService {
   constructor(
-    @InjectRepository(Recipe)
-    private cookbooksRepository: Repository<Recipe>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   findAll() {
