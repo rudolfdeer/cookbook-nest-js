@@ -1,0 +1,12 @@
+{
+  "type": "postgres",
+  "host": "127.0.0.1",
+  "port": 5432,
+  "username": "postgres",
+  "password": "123",
+  "database": "cookbook_nest",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "migrations": ["dist/data-access/migrations/**/*.ts"],
+  "subscribers": ["dist/data-access/subscribers/**/*.ts"],
+  "synchronize": true
+}
