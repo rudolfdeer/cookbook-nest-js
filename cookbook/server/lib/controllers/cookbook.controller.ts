@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Delete, Put, Param } from '@nestjs/common';
 import { CookbookService } from '../services/cookbook.service';
 
-@Controller('cookbooks')
+@Controller('api/cookbooks')
 export class CookbookController {
   constructor(private readonly cookbooksService: CookbookService) {}
 
   @Get()
   findAll() {
-    //
+    return this.cookbooksService.findAll();
   }
 
   @Get(':id')

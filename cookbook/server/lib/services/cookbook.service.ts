@@ -10,7 +10,7 @@ export class CookbookService {
     private cookbookRepository: Repository<Cookbook>,
   ) {}
 
-  findAll() {
-    //
+  findAll(): Promise<Cookbook[]> {
+    return this.cookbookRepository.find();
   }
 }
