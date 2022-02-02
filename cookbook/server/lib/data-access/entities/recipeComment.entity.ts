@@ -4,6 +4,7 @@ import {
   Entity,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { Recipe } from './recipe.entity';
 import { User } from './user.entity';
@@ -19,11 +20,17 @@ export class RecipeComment {
   @Column({ nullable: false })
   date: string;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  User: User;
+  @Column({ nullable: false })
+  userId: number;
 
-  @OneToOne(() => Recipe)
+  @Column({ nullable: false })
+  recipeId: number;
+
+  @ManyToOne(() => User)
   @JoinColumn()
-  Recipe: Recipe;
+  user: User;
+
+  @ManyToOne(() => Recipe)
+  @JoinColumn()
+  recipe: Recipe;
 }

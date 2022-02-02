@@ -4,6 +4,8 @@ import {
   Entity,
   OneToOne,
   JoinColumn,
+  ManyToOne,
+  RelationId,
 } from 'typeorm';
 import { User } from './user.entity';
 
@@ -11,6 +13,9 @@ import { User } from './user.entity';
 export class Cookbook {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ nullable: false })
+  userId: number;
 
   @Column({ nullable: false })
   title: string;
@@ -27,7 +32,8 @@ export class Cookbook {
   @Column({ default: 0 })
   views: number;
 
-  @OneToOne(() => User)
+  @ManyToOne(() => User)
   @JoinColumn()
   user: User;
+
 }

@@ -4,6 +4,7 @@ import {
   Entity,
   JoinColumn,
   OneToOne,
+  ManyToOne,
 } from 'typeorm';
 import { Cookbook } from './cookbook.entity';
 import { User } from './user.entity';
@@ -13,11 +14,17 @@ export class CookbookSaved {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  User: User;
+  @Column({ nullable: false })
+  userId: number;
 
-  @OneToOne(() => Cookbook)
+  @Column({ nullable: false })
+  cookbookId: number;
+
+  @ManyToOne(() => User)
   @JoinColumn()
-  Cookbook: Cookbook;
+  user: User;
+
+  @ManyToOne(() => Cookbook)
+  @JoinColumn()
+  cookbook: Cookbook;
 }
