@@ -29,5 +29,5 @@ export class Cookbook {
 
   @OneToOne(() => User)
   @JoinColumn()
-  User: User;
+  user: User;
 }

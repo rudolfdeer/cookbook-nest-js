@@ -8,6 +8,5 @@ import { CookbookService } from '../services/cookbook.service';
   imports: [TypeOrmModule.forFeature([Cookbook])],
   controllers: [CookbookController],
   providers: [CookbookService],
-  exports: [CookbookModule],
 })
 export class CookbookModule {}

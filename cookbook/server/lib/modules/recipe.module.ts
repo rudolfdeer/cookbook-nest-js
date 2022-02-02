@@ -8,6 +8,5 @@ import { RecipeService } from '../services/recipe.service';
   imports: [TypeOrmModule.forFeature([Recipe])],
   controllers: [RecipeController],
   providers: [RecipeService],
-  exports: [RecipeModule],
 })
 export class RecipeModule {}

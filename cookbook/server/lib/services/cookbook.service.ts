@@ -11,6 +11,6 @@ export class CookbookService {
   ) {}
 
   findAll(): Promise<Cookbook[]> {
-    return this.cookbookRepository.find();
+    return this.cookbookRepository.find({ relations: ['user'] });
   }
 }
