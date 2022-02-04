@@ -7,8 +7,11 @@ import {
   ManyToMany,
   JoinTable,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { Cookbook } from './cookbook.entity';
+import { RecipeComment } from './recipeComment.entity';
+import { RecipeLike } from './recipeLike.entity';
 import { User } from './user.entity';
 
 @Entity({ name: 'Recipe' })
@@ -40,7 +43,17 @@ export class Recipe {
   @Column({ default: 0 })
   views: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: User;
+
+  @OneToMany(() => RecipeComment,  comment => comment.recipe)
+  @JoinColumn()
+  comments: RecipeComment[];
+
+  @OneToMany(() => RecipeLike,  like => like.recipe)
+  @JoinColumn()
+  likes: RecipeLike[];
 }

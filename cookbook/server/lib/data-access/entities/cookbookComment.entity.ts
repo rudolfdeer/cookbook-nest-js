@@ -25,11 +25,15 @@ export class CookbookComment {
   @Column({ nullable: false })
   cookbookId: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE'
+  })
   @JoinColumn()
   user: User;
 
-  @ManyToOne(() => Cookbook)
+  @ManyToOne(() => Cookbook, cookbook => cookbook.comments, {
+    onDelete: 'CASCADE'
+  })
   @JoinColumn()
   cookbook: Cookbook;
 }

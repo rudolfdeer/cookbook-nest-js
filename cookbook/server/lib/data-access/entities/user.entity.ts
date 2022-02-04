@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
+import { CookbookSaved } from './cookbookSaved.entity';
+import { RecipeSaved } from './recipeSaved.entity';
 
 @Entity({ name: 'User' })
 export class User {
@@ -19,4 +21,12 @@ export class User {
 
   @Column({ default: 'No bio.' })
   bio: string;
+
+  @OneToMany(() => CookbookSaved,  cookbook => cookbook.cookbook)
+  @JoinColumn()
+  savedCookbooks: CookbookSaved[];
+
+  @OneToMany(() => RecipeSaved,  recipe => recipe.recipe)
+  @JoinColumn()
+  savedRecipes: RecipeSaved[];
 }

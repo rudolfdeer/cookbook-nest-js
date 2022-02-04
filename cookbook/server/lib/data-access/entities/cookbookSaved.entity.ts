@@ -20,11 +20,15 @@ export class CookbookSaved {
   @Column({ nullable: false })
   cookbookId: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, user => user.savedCookbooks, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: User;
 
-  @ManyToOne(() => Cookbook)
+  @ManyToOne(() => Cookbook, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   cookbook: Cookbook;
 }

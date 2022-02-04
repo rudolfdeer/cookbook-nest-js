@@ -19,11 +19,15 @@ export class CookbookLike {
   @Column({ nullable: false })
   cookbookId: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: User;
 
-  @ManyToOne(() => Cookbook)
+  @ManyToOne(() => Cookbook, cookbook => cookbook.likes, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   cookbook: Cookbook;
 }

@@ -26,11 +26,15 @@ export class RecipeComment {
   @Column({ nullable: false })
   recipeId: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: User;
 
-  @ManyToOne(() => Recipe)
+  @ManyToOne(() => Recipe, recipe => recipe.comments, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   recipe: Recipe;
 }
