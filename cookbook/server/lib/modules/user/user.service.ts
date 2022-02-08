@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'lib/data-access/entities/user.entity';
 import { comparePasswords } from 'lib/utils/auth/comparePasswords.util';
+import { encryptPassword } from 'lib/utils/auth/encryptPassword.util';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -38,7 +39,7 @@ export class UserService {
     return users;
   }
 
-  async findById(id: string): Promise<User> {
+  async findById(id: string | number): Promise<User> {
     const user = await this.userRepository.findOne(id, {
       relations: [
         'savedCookbooks',
@@ -75,7 +76,40 @@ export class UserService {
     return user;
   }
 
-  async deleteById(id: string): Promise<void> {
+  async deleteById(id: number): Promise<void> {
     await this.userRepository.delete(id);
+  }
+
+  async signUp(body: User) {
+
+    const { email, password } = body;
+
+    const userInDb = await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+
+    if (userInDb) {
+      throw new Error('user with this email already exists')
+    } 
+    
+    const hashedPassword = encryptPassword(password);
+    const newUser = {
+        email,
+        password: hashedPassword,
+      }
+
+    const user = await this.userRepository.save(newUser);
+    const payload = { email: user.email, sub: user.id };
+    const token = this.jwtService.sign(payload);
+
+    const result = await this.findById(user.id)
+
+    return {
+      id: user.id,
+      access_token: token,
+      user: result,
+    };
   }
 }

@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Delete, Put, Param, UseGuards, Request, Res } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Param, UseGuards, Request, Res, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
+import { User } from 'lib/data-access/entities/user.entity';
 import { UserService } from './user.service';
 
 @Controller('api/user')
@@ -30,8 +31,11 @@ export class UserController {
   }
 
   @Post('/sign-up')
-  async signUp() {
-    //
+  async signUp(@Body() body: User, @Res({ passthrough: true }) res: Response) {
+    const response = await this.usersService.signUp(body);
+    res.cookie('jwt', response.access_token);
+
+    return response.user;
   }
 
   @UseGuards(AuthGuard('local'))
@@ -45,6 +49,7 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @Post('/change-email')
   async changeEmail(@Request() req) {
+    //
     const userId =  req.user.id;
     return userId;
   }
@@ -54,14 +59,20 @@ export class UserController {
     //
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/sign-out')
-  async signIOut() {
-    //
+  async signOut(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('jwt');
+    return null;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete()
-  async deleteById() {
-    //return this.usersService.deleteById();
+  async deleteById(@Request() req, @Res({ passthrough: true }) res: Response) {
+    const userId =  req.user.id;
+    await this.usersService.deleteById(userId);
+    res.clearCookie('jwt');
+    return null;
   }
 
   @Put()

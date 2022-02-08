@@ -10,7 +10,3 @@ export const CRYPTO = {
   KEYLEN: 64,
   DIGEST: 'sha512',
 };
-
-export const jwtConstants = {
-  secret: 'secretKey',
-};
