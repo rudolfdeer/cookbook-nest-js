@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'lib/data-access/entities/user.entity';
+import { comparePasswords } from 'lib/utils/auth/comparePasswords.util';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -8,7 +10,25 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
+
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (user && comparePasswords(password, user.password)) {
+      return user;
+    }
+
+    return null;
+  }
+
+  async signIn(user: User) {
+    const payload = { email: user.email, sub: user.id };
+    return {
+      id: user.id,
+      access_token: this.jwtService.sign(payload),
+    };
+  }
 
   findAll() {
     //
@@ -41,7 +61,17 @@ export class UserService {
     return user;
   }
 
+  async findByEmail(email: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+
+    return user;
+  }
+
   async deleteById(id: string): Promise<void> {
-    await this.userRepository.delete(id)
+    await this.userRepository.delete(id);
   }
 }

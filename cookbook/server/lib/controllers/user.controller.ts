@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Delete, Put, Param, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'lib/guards/auth.guard';
+import { Controller, Get, Post, Delete, Put, Param, UseGuards, Request } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from 'lib/modules/auth/auth.service';
 import { UserService } from '../services/user.service';
 
 @Controller('api/user')
@@ -7,7 +8,6 @@ export class UserController {
   constructor(private readonly usersService: UserService) {}
 
   @Get()
-  @UseGuards(AuthGuard)
   findLoggedIn() {
     //
   }
@@ -32,9 +32,10 @@ export class UserController {
     //
   }
 
+  @UseGuards(AuthGuard('local'))
   @Post('/sign-in')
-  async signIn() {
-    //
+  async signIn(@Request() req) {
+    return this.usersService.signIn(req.user);
   }
 
   @Post('/change-email')

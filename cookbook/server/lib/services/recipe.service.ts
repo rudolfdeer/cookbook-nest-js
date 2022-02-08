@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Recipe } from 'lib/data-access/entities/recipe.entity';
 import { RecipeComment } from 'lib/data-access/entities/recipeComment.entity';
 import { RecipeLike } from 'lib/data-access/entities/recipeLike.entity';
-import { User } from 'lib/data-access/entities/user.entity';
 import { getRepository, Repository } from 'typeorm';
 
 @Injectable()
