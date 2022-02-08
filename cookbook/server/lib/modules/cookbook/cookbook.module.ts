@@ -8,9 +8,9 @@ import { RecipeComment } from 'lib/data-access/entities/recipeComment.entity';
 import { RecipeCookbook } from 'lib/data-access/entities/recipeCookbook.entity';
 import { RecipeLike } from 'lib/data-access/entities/recipeLike.entity';
 import { User } from 'lib/data-access/entities/user.entity';
-import { CookbookController } from '../controllers/cookbook.controller';
-import { CookbookService } from '../services/cookbook.service';
-import { JwtStrategy } from './auth/jwt.strategy';
+import { CookbookController } from './cookbook.controller';
+import { CookbookService } from './cookbook.service';
+import { JwtStrategy } from '../../utils/strategies/jwt.strategy';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Cookbook, User, CookbookComment, CookbookLike, RecipeCookbook, Recipe, RecipeLike, RecipeComment])],

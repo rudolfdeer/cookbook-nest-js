@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CookbookModule } from './modules/cookbook.module';
-import { RecipeModule } from './modules/recipe.module';
-import { UserModule } from './modules/user.module';
+import { CookbookModule } from './cookbook/cookbook.module';
+import { RecipeModule } from './recipe/recipe.module';
+import { UserModule } from './user/user.module';
 import "reflect-metadata";
 
 @Module({

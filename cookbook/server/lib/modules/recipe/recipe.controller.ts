@@ -2,7 +2,7 @@ import { Controller, Get, Post, Delete, Put, Param, Body, UseGuards, Request } f
 import { AuthGuard } from '@nestjs/passport';
 import { Recipe } from 'lib/data-access/entities/recipe.entity';
 import { RecipeComment } from 'lib/data-access/entities/recipeComment.entity';
-import { RecipeService } from '../services/recipe.service';
+import { RecipeService } from './recipe.service';
 
 @Controller('api/recipes')
 export class RecipeController {

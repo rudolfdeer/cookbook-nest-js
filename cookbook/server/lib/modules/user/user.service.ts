@@ -32,12 +32,14 @@ export class UserService {
     };
   }
 
-  findAll() {
-    //
+  async findAll() {
+    const users = await this.userRepository.find();
+
+    return users;
   }
 
-  findById(id: string): Promise<User> {
-    const user = this.userRepository.findOne(id, {
+  async findById(id: string): Promise<User> {
+    const user = await this.userRepository.findOne(id, {
       relations: [
         'savedCookbooks',
         'savedCookbooks.cookbook',

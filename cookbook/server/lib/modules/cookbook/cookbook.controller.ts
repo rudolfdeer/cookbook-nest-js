@@ -3,7 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Cookbook } from 'lib/data-access/entities/cookbook.entity';
 import { CookbookComment } from 'lib/data-access/entities/cookbookComment.entity';
 import { RecipeComment } from 'lib/data-access/entities/recipeComment.entity';
-import { CookbookService } from '../services/cookbook.service';
+import { CookbookService } from './cookbook.service';
 
 @Controller('api/cookbooks')
 export class CookbookController {
