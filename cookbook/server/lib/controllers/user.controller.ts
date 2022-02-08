@@ -1,23 +1,25 @@
-import { Controller, Get, Post, Delete, Put, Param, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Param, UseGuards, Request, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from 'lib/modules/auth/auth.service';
+import { Response } from 'express';
 import { UserService } from '../services/user.service';
 
 @Controller('api/user')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
-  findLoggedIn() {
-    //
+  findLoggedIn(@Request() req) {
+    const userId =  req.user.id;
+    return userId;
   }
 
-  @Get(':id')
+  @Get('/:id')
   async findById(@Param('id') id: string) {
     return this.usersService.findById(id);
   }
 
-  @Get('users/all')
+  @Get('/users/all')
   async findAll() {
     //
   }
@@ -34,13 +36,17 @@ export class UserController {
 
   @UseGuards(AuthGuard('local'))
   @Post('/sign-in')
-  async signIn(@Request() req) {
-    return this.usersService.signIn(req.user);
+  async signIn(@Request() req, @Res({ passthrough: true }) res: Response) {
+    const response = await this.usersService.signIn(req.user);
+    res.cookie('jwt', response.access_token);
+    return response;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('/change-email')
-  async changeEmail() {
-    //
+  async changeEmail(@Request() req) {
+    const userId =  req.user.id;
+    return userId;
   }
 
   @Post('/change-password')
@@ -53,7 +59,7 @@ export class UserController {
     //
   }
 
-  @Delete('/')
+  @Delete()
   async deleteById() {
     //return this.usersService.deleteById();
   }

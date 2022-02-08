@@ -9,14 +9,7 @@ import { RecipeSaved } from 'lib/data-access/entities/recipeSaved.entity';
 import { User } from 'lib/data-access/entities/user.entity';
 import { UserController } from '../controllers/user.controller';
 import { UserService } from '../services/user.service';
-
-// @Module({
-//   imports: [TypeOrmModule.forFeature([User, RecipeSaved, CookbookSaved])],
-//   controllers: [UserController],
-//   providers: [UserService],
-//   exports: [UserService]
-// })
-// export class UserModule {}
+import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({
   imports: [
@@ -28,7 +21,7 @@ import { UserService } from '../services/user.service';
     }),
   ],
   controllers: [UserController],
-  providers: [UserService, LocalStrategy],
+  providers: [UserService, LocalStrategy, JwtStrategy],
   exports: [UserService],
 })
 export class UserModule {}

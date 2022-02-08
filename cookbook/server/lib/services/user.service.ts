@@ -24,9 +24,11 @@ export class UserService {
 
   async signIn(user: User) {
     const payload = { email: user.email, sub: user.id };
+    const token = this.jwtService.sign(payload);
+
     return {
       id: user.id,
-      access_token: this.jwtService.sign(payload),
+      access_token: token,
     };
   }
 

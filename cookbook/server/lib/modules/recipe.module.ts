@@ -6,10 +6,11 @@ import { RecipeLike } from 'lib/data-access/entities/recipeLike.entity';
 import { User } from 'lib/data-access/entities/user.entity';
 import { RecipeController } from '../controllers/recipe.controller';
 import { RecipeService } from '../services/recipe.service';
+import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Recipe, User, RecipeLike, RecipeComment])],
   controllers: [RecipeController],
-  providers: [RecipeService],
+  providers: [RecipeService, JwtStrategy],
 })
 export class RecipeModule {}

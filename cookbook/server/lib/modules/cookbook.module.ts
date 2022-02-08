@@ -10,10 +10,11 @@ import { RecipeLike } from 'lib/data-access/entities/recipeLike.entity';
 import { User } from 'lib/data-access/entities/user.entity';
 import { CookbookController } from '../controllers/cookbook.controller';
 import { CookbookService } from '../services/cookbook.service';
+import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Cookbook, User, CookbookComment, CookbookLike, RecipeCookbook, Recipe, RecipeLike, RecipeComment])],
   controllers: [CookbookController],
-  providers: [CookbookService],
+  providers: [CookbookService, JwtStrategy],
 })
 export class CookbookModule {}

@@ -28,10 +28,10 @@ export class RecipeService {
     await this.recipeRepository.delete(id)
   }
 
-  async create(body: Recipe) {
-    const recipe = await this.recipeRepository.save(body);
+  async create(body: Recipe, userId: number) {
+    const newRecipe = {...body, ...{ userId }}
+    const recipe = await this.recipeRepository.save(newRecipe);
     const id = recipe.id;
-
     const result = await this.recipeRepository.findOne(id);
 
     return result;

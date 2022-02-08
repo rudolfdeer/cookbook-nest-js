@@ -28,8 +28,9 @@ export class CookbookService {
     await this.cookbookRepository.delete(id)
   }
 
-  async create(body: Cookbook) {
-    const cookbook = await this.cookbookRepository.save(body);
+  async create(body: Cookbook, userId: number) {
+    const newCookbook = {...body, ...{ userId }}
+    const cookbook = await this.cookbookRepository.save(newCookbook);
     const id = cookbook.id;
 
     const result = await this.cookbookRepository.findOne(id);

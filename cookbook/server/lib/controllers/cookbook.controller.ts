@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Delete, Put, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Param, Body, UseGuards, Request } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { Cookbook } from 'lib/data-access/entities/cookbook.entity';
 import { CookbookComment } from 'lib/data-access/entities/cookbookComment.entity';
 import { RecipeComment } from 'lib/data-access/entities/recipeComment.entity';
@@ -18,33 +19,40 @@ export class CookbookController {
     return this.cookbooksService.findById(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  async create(@Body() body: Cookbook) {
-    return this.cookbooksService.create(body);
+  async create(@Body() body: Cookbook, @Request() req) {
+    const userId = req.user.id;
+    return this.cookbooksService.create(body, userId);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post(':id')
-  async createComment(@Param('id') id: string, @Body() body: CookbookComment) {
-    //userId
-    return this.cookbooksService.createComment(id, 2, body)
+  async createComment(@Param('id') id: string, @Body() body: CookbookComment, @Request() req) {
+    const userId = req.user.id;
+    return this.cookbooksService.createComment(id, userId, body)
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post(':id/like')
-  async like(@Param('id') id: string) {
-    //userId
-    return this.cookbooksService.like(id, 1)
+  async like(@Param('id') id: string,  @Request() req) {
+    const userId = req.user.id;
+    return this.cookbooksService.like(id, userId)
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post(':id/image')
   async uploadImage(@Param('id') id: string) {
     //
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   async deleteById(@Param('id') id: string) {
     return this.cookbooksService.deleteById(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put(':id')
   async update(@Param('id') id: string, @Body() body: Cookbook) {
     return this.cookbooksService.update(id, body);
