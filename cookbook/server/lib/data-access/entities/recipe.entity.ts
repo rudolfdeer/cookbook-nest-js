@@ -44,16 +44,21 @@ export class Recipe {
   views: number;
 
   @ManyToOne(() => User, {
+    eager: true,
     onDelete: 'CASCADE',
   })
   @JoinColumn()
   user: User;
 
-  @OneToMany(() => RecipeComment,  comment => comment.recipe)
+  @OneToMany(() => RecipeComment,  comment => comment.recipe, {
+    eager: true,
+  })
   @JoinColumn()
   comments: RecipeComment[];
 
-  @OneToMany(() => RecipeLike,  like => like.recipe)
+  @OneToMany(() => RecipeLike,  like => like.recipe, {
+    eager: true,
+  })
   @JoinColumn()
   likes: RecipeLike[];
 }

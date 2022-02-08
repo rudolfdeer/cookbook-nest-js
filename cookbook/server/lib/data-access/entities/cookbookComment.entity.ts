@@ -26,6 +26,7 @@ export class CookbookComment {
   cookbookId: number;
 
   @ManyToOne(() => User, {
+    eager: true,
     onDelete: 'CASCADE'
   })
   @JoinColumn()

@@ -21,6 +21,7 @@ export class RecipeCookbook {
   recipeId: number;
 
   @ManyToOne(() => Recipe, {
+    eager: true,
     onDelete: 'CASCADE',
   })
   @JoinColumn()

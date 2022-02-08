@@ -37,20 +37,27 @@ export class Cookbook {
   views: number;
 
   @ManyToOne(() => User, {
+    eager: true,
     onDelete: 'CASCADE'
   })
   @JoinColumn()
   user: User;
 
-  @OneToMany(() => CookbookComment,  comment => comment.cookbook)
+  @OneToMany(() => CookbookComment,  comment => comment.cookbook, {
+    eager: true
+  })
   @JoinColumn()
   comments: CookbookComment[];
 
-  @OneToMany(() => CookbookLike,  like => like.cookbook)
+  @OneToMany(() => CookbookLike,  like => like.cookbook, {
+    eager: true
+  })
   @JoinColumn()
   likes: CookbookLike[];
 
-  @OneToMany(() => RecipeCookbook,  recipe => recipe.cookbook)
+  @OneToMany(() => RecipeCookbook,  recipe => recipe.cookbook, {
+    eager: true
+  })
   @JoinColumn()
   recipes: RecipeCookbook[];
 }
