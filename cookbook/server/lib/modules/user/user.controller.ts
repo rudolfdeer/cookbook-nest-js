@@ -22,7 +22,7 @@ export class UserController {
 
   @Get('/users/all')
   async findAll() {
-    //
+    return this.usersService.findAll()
   }
 
   @Post('/update-photo')
@@ -48,15 +48,18 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post('/change-email')
-  async changeEmail(@Request() req) {
-    //
+  async changeEmail(@Body() body: {email: string}, @Request() req, @Res({ passthrough: true }) res: Response) {
     const userId =  req.user.id;
-    return userId;
+    const response = await this.usersService.changeEmail(body.email, userId);
+    res.cookie('jwt', response.access_token);
+    return response.user;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('/change-password')
-  async changePassword() {
-    //
+  async changePassword(@Body() body: {password: string}, @Request() req) {
+    const userId =  req.user.id;
+    return this.usersService.changePassword(body.password, userId);
   }
 
   @UseGuards(AuthGuard('jwt'))

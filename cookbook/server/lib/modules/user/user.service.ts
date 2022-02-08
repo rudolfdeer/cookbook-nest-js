@@ -81,7 +81,6 @@ export class UserService {
   }
 
   async signUp(body: User) {
-
     const { email, password } = body;
 
     const userInDb = await this.userRepository.findOne({
@@ -91,25 +90,57 @@ export class UserService {
     });
 
     if (userInDb) {
-      throw new Error('user with this email already exists')
-    } 
-    
+      throw new Error('user with this email already exists');
+    }
+
     const hashedPassword = encryptPassword(password);
     const newUser = {
-        email,
-        password: hashedPassword,
-      }
+      email,
+      password: hashedPassword,
+    };
 
     const user = await this.userRepository.save(newUser);
     const payload = { email: user.email, sub: user.id };
     const token = this.jwtService.sign(payload);
 
-    const result = await this.findById(user.id)
+    const result = await this.findById(user.id);
 
     return {
       id: user.id,
       access_token: token,
       user: result,
+    };
+  }
+
+  async changePassword (newPassword: string, userId: number) {
+    const hashedPassword = encryptPassword(newPassword);
+
+    await this.userRepository.update(userId, {password: hashedPassword});
+
+    return this.findById(userId);
+  }
+
+  async changeEmail (newEmail: string, userId: number) {
+    const userInDb = await this.userRepository.findOne({
+      where: {
+        email: newEmail,
+      },
+    });
+
+    if(userInDb) {
+      throw new Error ('user with this email already exists')
+    }
+
+    await this.userRepository.update(userId, {email: newEmail});
+    const user = await this.userRepository.findOne(userId);
+
+    const payload = { email: user.email, sub: user.id };
+    const token = this.jwtService.sign(payload);
+
+    return {
+      id: user.id,
+      access_token: token,
+      user,
     };
   }
 }
