@@ -1,6 +1,8 @@
-import { Controller, Get, Post, Delete, Put, Param, UseGuards, Request, Res, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Param, UseGuards, Request, Res, Body, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
+import { multerOptions } from 'lib/constants/multer.config';
 import { User } from 'lib/data-access/entities/user.entity';
 import { UserService } from './user.service';
 
@@ -25,9 +27,14 @@ export class UserController {
     return this.usersService.findAll()
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('/update-photo')
-  async updatePhoto() {
-    //
+  @UseInterceptors(FileInterceptor('image', multerOptions))
+  async updatePhoto(@Request() req, @UploadedFile() file: Express.Multer.File) {
+    const fileName = file.originalname;
+    const userId =  req.user.id;
+    
+    return this.usersService.uploadImage(userId, fileName);
   }
 
   @Post('/sign-up')
@@ -78,8 +85,10 @@ export class UserController {
     return null;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put()
-  async update() {
-    //
+  async update(@Request() req, @Body() body: User) {
+    const userId =  req.user.id;
+    return this.usersService.update(body, userId);
   }
 }

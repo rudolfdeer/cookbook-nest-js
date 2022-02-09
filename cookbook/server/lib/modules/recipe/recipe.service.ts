@@ -82,4 +82,16 @@ export class RecipeService {
     const recipe = await this.recipeRepository.findOne(id);
     return recipe;
   }
+
+  async uploadImage(id: string, fileName: string) {
+
+    await this.recipeRepository.update(id, {
+      image: fileName
+    });
+
+    const recipe = await this.recipeRepository.findOne(id);
+
+    return recipe;
+
+  }
 }

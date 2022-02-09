@@ -143,4 +143,23 @@ export class UserService {
       user,
     };
   }
+
+  async update(body: User, userId: number) {
+    await this.userRepository.update(userId, body);
+    const user = await this.userRepository.findOne(userId);
+
+    return user;
+  }
+
+  async uploadImage(id: string, fileName: string) {
+
+    await this.userRepository.update(id, {
+      image: fileName
+    });
+
+    const user = await this.findById(id);
+
+    return user;
+
+  }
 }

@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Delete, Put, Param, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Param, Body, UseGuards, Request, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerOptions } from 'lib/constants/multer.config';
 import { Cookbook } from 'lib/data-access/entities/cookbook.entity';
 import { CookbookComment } from 'lib/data-access/entities/cookbookComment.entity';
 import { CookbookService } from './cookbook.service';
@@ -41,8 +43,11 @@ export class CookbookController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post(':id/image')
-  async uploadImage(@Param('id') id: string) {
-    //
+  @UseInterceptors(FileInterceptor('image', multerOptions))
+  async uploadImage(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
+    const fileName = file.originalname;
+    
+    return this.cookbooksService.uploadImage(id, fileName);
   }
 
   @UseGuards(AuthGuard('jwt'))

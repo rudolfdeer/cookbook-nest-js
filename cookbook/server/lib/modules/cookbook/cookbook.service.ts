@@ -81,4 +81,16 @@ export class CookbookService {
     const cookbook = await this.cookbookRepository.findOne(id);
     return cookbook;
   }
+
+  async uploadImage(id: string, fileName: string) {
+
+    await this.cookbookRepository.update(id, {
+      image: fileName
+    });
+
+    const cookbook = await this.cookbookRepository.findOne(id);
+
+    return cookbook;
+
+  }
 }
