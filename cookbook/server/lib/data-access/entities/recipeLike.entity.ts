@@ -3,7 +3,6 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
   ManyToOne,
 } from 'typeorm';
 import { Recipe } from './recipe.entity';
@@ -20,7 +19,7 @@ export class RecipeLike {
   @Column({ nullable: false })
   recipeId: number;
 
-  @ManyToOne(() => Recipe, recipe => recipe.likes, {
+  @ManyToOne(() => Recipe, (recipe) => recipe.likes, {
     onDelete: 'CASCADE',
   })
   @JoinColumn()

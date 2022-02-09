@@ -2,10 +2,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
   Entity,
-  OneToOne,
   JoinColumn,
   ManyToOne,
-  RelationId,
   OneToMany,
 } from 'typeorm';
 import { CookbookComment } from './cookbookComment.entity';
@@ -38,25 +36,25 @@ export class Cookbook {
 
   @ManyToOne(() => User, {
     eager: true,
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   user: User;
 
-  @OneToMany(() => CookbookComment,  comment => comment.cookbook, {
-    eager: true
+  @OneToMany(() => CookbookComment, (comment) => comment.cookbook, {
+    eager: true,
   })
   @JoinColumn()
   comments: CookbookComment[];
 
-  @OneToMany(() => CookbookLike,  like => like.cookbook, {
-    eager: true
+  @OneToMany(() => CookbookLike, (like) => like.cookbook, {
+    eager: true,
   })
   @JoinColumn()
   likes: CookbookLike[];
 
-  @OneToMany(() => RecipeCookbook,  recipe => recipe.cookbook, {
-    eager: true
+  @OneToMany(() => RecipeCookbook, (recipe) => recipe.cookbook, {
+    eager: true,
   })
   @JoinColumn()
   recipes: RecipeCookbook[];

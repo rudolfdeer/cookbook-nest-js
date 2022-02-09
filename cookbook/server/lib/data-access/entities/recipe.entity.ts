@@ -2,14 +2,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   Entity,
-  OneToOne,
   JoinColumn,
-  ManyToMany,
-  JoinTable,
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { Cookbook } from './cookbook.entity';
 import { RecipeComment } from './recipeComment.entity';
 import { RecipeLike } from './recipeLike.entity';
 import { User } from './user.entity';
@@ -50,13 +46,13 @@ export class Recipe {
   @JoinColumn()
   user: User;
 
-  @OneToMany(() => RecipeComment,  comment => comment.recipe, {
+  @OneToMany(() => RecipeComment, (comment) => comment.recipe, {
     eager: true,
   })
   @JoinColumn()
   comments: RecipeComment[];
 
-  @OneToMany(() => RecipeLike,  like => like.recipe, {
+  @OneToMany(() => RecipeLike, (like) => like.recipe, {
     eager: true,
   })
   @JoinColumn()
