@@ -1,0 +1,44 @@
+@import '../../styles/index.scss';
+
+.page--not-found {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__bg {
+    width: 607px;
+    height: 858px;
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  &__title {
+    @include title-40;
+    font-size: 70px;
+
+    &--small {
+     @include title-40; 
+    }
+  }
+
+  &__text {
+    @include text-18;
+
+    a {
+      @include text-18;
+      color: $primary-yellow;
+      text-decoration: underline;
+    }
+  }
+}

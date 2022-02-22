@@ -1,0 +1,346 @@
+@import '../../../styles/index.scss';
+
+.overlay {
+  &__content {
+    &--row {
+      max-width: 1016px;
+      width: 100%;
+      background: $white;
+      padding: 72px 56px;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
+.pop-up--modify {
+  display: flex;
+  position: relative;
+  padding-left: 424px;
+  width: 100%;
+
+  &__sections {
+    width: 100%;
+  }
+
+  &__section {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+
+    &--top {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    &__title {
+      @include title-20;
+
+      &--editable {
+        @include title-40;
+        display: block;
+        width: 100%;
+        border: none;
+        resize: none;
+        background: $grey-light;
+        padding: 5px;
+        color: $main;
+        margin-bottom: 0;
+      }
+    }
+
+    &__btn {
+      @include text-18;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border: none;
+      background: none;
+      color: $primary-yellow;
+      padding: 0;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+
+      &__section {
+        flex-direction: column;
+      }
+
+      &:first-child {
+        margin-right: 16px;
+      }
+
+      &:last-child {
+        margin-left: 16px;
+      }
+    }
+
+    &--description {
+      &--recipe {
+        height: 150px;
+        display: flex;
+        flex-wrap: nowrap;
+
+        width: 100%;
+        margin-bottom: 32px;
+      }
+    }
+  }
+
+  &__input {
+    &--file {
+      opacity: 0;
+      appearance: none;
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 222;
+      border-radius: 102px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &--textarea {
+      width: 100%;
+      margin-right: 40px;
+      border: none;
+      resize: none;
+      display: flex;
+      background: $grey-light;
+      padding: 5px;
+
+      &:disabled {
+        background: none;
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    position: absolute;
+    top: -72px;
+    left: -56px;
+    background: url('../../../assets/images/photo-mask-single.png') center
+      no-repeat;
+    width: 440px;
+    height: auto;
+
+    img {
+      opacity: 0.5;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    &__btn {
+      @include button-dark;
+      width: 130px;
+      height: 62px;
+
+      &--light {
+        @include button-light;
+        height: 62px;
+        margin-right: 40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .overlay {
+    &__content {
+      &--row {
+        padding: 40px 30px;
+
+      
+        .pop-up--modify {
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 24px;
+          padding-left: 0;
+
+          &__title {
+            font-size: 30px;
+            text-align: center;
+          }
+
+          &__image {
+            position: static;
+            margin-bottom: 24px;
+          }
+
+          &__input {
+            &--file {
+              width: 440px;
+              max-height: 440px;
+            }
+
+            &--textarea {
+              margin-right: 0;
+            }
+          }
+
+          &__sections {
+            padding-left: 0;
+            align-items: center;
+          }
+
+          &__section {
+            &--top {
+              margin-right: 0;
+            }
+
+            
+            &--information {
+              width: 100%;
+
+              &__ingredients {
+                flex-basis: 50%;
+              }
+            }
+
+            &--comments {
+              &__title {
+                text-align: center;
+              }
+            }
+          }
+        }
+      
+      }
+      
+    }
+  }
+}
+
+
+@media (max-width: 639px) {
+  .overlay {
+    &__content {
+      &--row {
+        padding: 40px 30px;
+
+        .pop-up--modify {
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 24px;
+
+          &__title {
+            font-size: 24px;
+          }
+
+          &__image {
+            position: static;
+            margin-bottom: 24px;
+            width: 200px;
+            height: 200px;
+          }
+
+          &__sections {
+            padding-left: 0;
+            align-items: center;
+          }
+
+          &__input {
+            &--file {
+              width: 200px;
+              height: 200px;
+            }
+
+            &--textarea {
+              margin-right: 0;
+            }
+          }
+
+          &__btns {
+            flex-direction: column;
+            align-items: center;
+
+            &__btn {
+              &--light {
+                margin-right: 0;
+                margin-bottom: 24px;
+              }
+            }
+          }
+
+          &__section {
+            flex-direction: column;
+
+            &__container {
+              margin: 0;
+
+              .pop-up--modify__section__title {
+                margin-bottom: 5px;
+              }
+            }
+
+            &--top {
+              margin-right: 0;
+              flex-direction: column;
+              align-items: center;
+            }
+
+            &--information {
+              width: 100%;
+              flex-direction: column;
+              align-items: center;
+
+              &__directions {
+                margin-bottom: 24px;
+              }
+
+              
+
+              &__ingredients {
+                flex-basis: 50%;
+              }
+            }
+            
+            &--description {
+                &--recipe {
+                  flex-direction: column;
+                  align-items: center;
+                }
+              }
+
+            &--comments {
+              &__title {
+                text-align: center;
+              }
+            }
+
+            &__title {
+              &--editable {
+                margin-right: 0;
+              text-align: center;
+              }
+              
+            }
+          }
+
+        }
+      
+      }
+      
+    }
+  }
+}

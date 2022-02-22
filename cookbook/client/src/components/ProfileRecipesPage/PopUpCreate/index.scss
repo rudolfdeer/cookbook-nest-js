@@ -1,0 +1,159 @@
+@import '../../../styles/index.scss';
+
+.pop-up--create {
+  width: 100%;
+  position: relative;
+
+  &__title {
+    @include title-40();
+  }
+
+  &__btns {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    &__btn {
+      @include button-dark;
+      width: 130px;
+      height: 62px;
+
+      &--light {
+        @include button-light;
+        width: 130px;
+        height: 62px;
+        margin-right: 40px;
+      }
+    }
+  }
+
+  &__section {
+    margin-bottom: 24px;
+
+    &__title {
+      @include title-20;
+      display: block;
+      margin-bottom: 14px;
+
+      span {
+        font-size: 25px;
+        color: $primary-yellow;
+      }
+    }
+
+    &__btn {
+      @include button-dark;
+      margin-right: 40px;
+      width: 130px;
+      height: 62px;
+      width: 271px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    &__input {
+      padding: 10px 16px;
+      width: 100%;
+      border: 1px solid $white-dirty;
+      border-radius: 10px;
+      height: 40px;
+
+      &--error {
+        padding: 10px 16px;
+        width: 100%;
+        border: 1px solid $white-dirty;
+        border-radius: 10px;
+        height: 40px;
+        margin-bottom: 8px;
+      }
+
+      &--file {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &--big {
+        padding: 10px 16px;
+        width: 100%;
+        border: 1px solid $white-dirty;
+        border-radius: 10px;
+        height: 104px;
+      }
+
+      &__error {
+        display: block;
+        width: 100%;
+        height: 10px;
+        margin-bottom: 22px;
+        color: $red;
+        font-size: 10px;
+      }
+    }
+
+    &__preview {
+      display: block;
+      height: 62px;
+      width: auto;
+    }
+
+    &--image {
+      display: flex;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+@media (max-width: 639px) {
+  .profile-page--recipes {
+    .overlay {
+    &__content {
+      padding: 40px 30px;
+
+      .pop-up--create {
+        &__title {
+          text-align: center;
+        }
+
+        &__section {
+          &--image {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          &__title {
+            text-align: center;
+          }
+
+          &__btn {
+            margin-bottom: 24px;
+            margin-right: 0;
+            width: auto;
+            text-align: center;
+          }
+        }
+
+        &__btns {
+          flex-direction: column;
+          align-items: center;
+
+          &__btn {
+            &--light {
+              margin-right: 0;
+              margin-bottom: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+  }
+  
+}

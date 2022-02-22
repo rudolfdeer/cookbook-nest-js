@@ -1,0 +1,385 @@
+@mixin title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+@mixin title-20 {
+  @include title();
+
+  font-size: 20px;
+  line-height: 24px;
+
+  @media (max-width: 1199px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 639px) {
+    font-size: 16px;
+  }
+}
+
+@mixin title-16 {
+  @include title();
+
+  font-size: 16px;
+  line-height: 20px;
+
+  @media (max-width: 1199px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 639px) {
+    font-size: 12px;
+  }
+}
+
+@mixin text-18 {
+  font-size: 18px;
+  line-height: 22px;
+
+  @media (max-width: 1199px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 639px) {
+    font-size: 14px;
+  }
+}
+
+@mixin title-40 {
+  @include title();
+
+  font-size: 40px;
+  margin-bottom: 48px;
+
+  @media (max-width: 1199px) {
+    font-size: 36px;
+  }
+
+  @media (max-width: 639px) {
+    font-size: 32px;
+  }
+}
+
+@mixin button {
+  border: 2px solid $primary-yellow;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 20px;
+
+  a {
+    font-weight: bold;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
+
+@mixin button-light {
+  @include button;
+
+  background: none;
+  color: $primary-yellow;
+
+  a {
+    color: $primary-yellow;
+    font-size: 20px;
+  }
+}
+
+@mixin button-dark {
+  @include button;
+
+  background: $primary-yellow;
+
+  a {
+    color: $main;
+    font-size: 20px;
+  }
+}
+
+@mixin statistics-data {
+  .card__statistics-item {
+    margin-right: 24px;
+    line-height: 19px;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .card__statistics-item__icon {
+    margin-right: 8px;
+
+    width: 15px;
+    height: 15px;
+
+    &.dots {
+      &:hover {
+        > circle {
+          fill: $primary-yellow;
+        }
+      }
+    }
+  }
+}
+
+@mixin nav-list {
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .list__item {
+    &:hover {
+      a {
+        color: $primary-yellow;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+@mixin page-nav-list {
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .list__item {
+    &:hover {
+      a {
+        color: $primary-yellow;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  li {
+    @include title-20;
+
+    margin-right: 32px;
+  }
+
+  .list__item {
+    a {
+      @include title-20;
+    }
+  }
+
+  .list__item--selected {
+    border-bottom: 5px solid $primary-yellow;
+  }
+
+  @media (max-width: 639px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    li {
+      justify-self: center;
+      margin-right: 0;
+    }
+
+    .list__item--selected {
+      width: 100%;
+        text-align: center;
+    }
+  }
+}
+
+@mixin form {
+  padding: 72px 56px;
+  width: 600px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  background-color: $white;
+
+  .form__logo {
+    margin-bottom: 48px;
+    width: 137px;
+    height: 40px;
+    background: url('../../../assets/images/logo-big.png') center no-repeat;
+  }
+
+  .form__title {
+    @include title-40();
+
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  .form__title_small {
+    @include title-16();
+
+    margin: 0;
+    margin-bottom: 40px;
+
+    a {
+      color: $primary-yellow;
+    }
+  }
+
+  .form {
+    .form__label {
+      display: block;
+      margin-bottom: 8px;
+      width: 100%;
+      color: $grey-dark;
+
+      &.password {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          color: $primary-yellow;
+        }
+      }
+    }
+
+    .form__input {
+      padding: 0 16px;
+      height: 54px;
+      width: 100%;
+      border: 1px solid $white-dirty;
+      border-radius: 8px;
+      margin-bottom: 10px;
+
+      &.submit {
+        @include button-dark();
+
+        margin-bottom: 0;
+      }
+    }
+
+    .form__error {
+      display: block;
+      width: 100%;
+      height: 10px;
+      margin-bottom: 22px;
+      color: $red;
+      font-size: 10px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    padding: 22px 10px;
+
+    .form__title_small {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+@mixin comment {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  &__photo {
+    width: 68px;
+    height: 68px;
+    margin-right: 16px;
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 55px;
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 716px;
+
+    &--top {
+      width: 100%;
+      max-width: 716px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__user {
+    font-size: 18px;
+    color: $grey-dark;
+  }
+
+  &--new {
+    margin-bottom: 40px;
+    height: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    &__input {
+      padding: 0 16px;
+      max-width: 800px;
+      flex-basis: 100%;
+      background: $white;
+      border: 1px solid $white-dirty;
+      border-radius: 10px;
+    }
+
+    &__btn {
+      @include button;
+
+      width: 88px;
+      background: url('../../../../assets/images/Union.png') center no-repeat;
+      background-color: $primary-yellow;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media(max-width: 639px) {
+    flex-direction: column;
+    align-items: center;
+    &__photo {
+      width: 30px;
+      height: 30px;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+
+    &__container--top {
+      align-items: center;
+      flex-direction: column;
+    }
+
+    &--new {
+      flex-direction: column;
+      height: auto;
+      align-items: center;
+
+      &__input {
+        line-height: 40px;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      &__btn {
+        height: 40px;
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+@import '../../../styles/index.scss';
+
+.overlay {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: visible;
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+  position: relative;
+  overflow-y: scroll;
+
+  &__content {
+    max-width: 1016px;
+    width: 100%;
+    background: $white;
+    padding: 72px 56px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .pop-up--users-cookbook {
+      &__title {
+        @include title-40();
+
+        max-width: 544px;
+        margin-bottom: 0;
+      }
+
+      &__btn {
+        @include button-dark;
+        width: 277px;
+        height: 54px;
+      }
+
+      &__author {
+        margin-bottom: 40px;
+
+        a {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 22px;
+          color: $primary-yellow;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &__image {
+        display: flex;
+        width: 440px;
+        overflow: hidden;
+        border-radius: 10px 50px;
+        background-size: 100% !important;
+        margin-right: 16px;
+      }
+
+      &__section {
+        &__title {
+          @include title-20();
+          margin-bottom: 40px;
+        }
+
+        &--top {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          margin-bottom: 16px;
+        }
+
+        &--description {
+          display: flex;
+          flex-wrap: nowrap;
+          width: 100%;
+          margin-bottom: 32px;
+
+          &__text {
+            max-width: 424px;
+            margin-left: 16px;
+            min-height: 246px;
+
+            p {
+              margin: 0;
+            }
+          }
+        }
+
+        &--statistics {
+          @include statistics-data;
+
+          display: flex;
+          flex-wrap: nowrap;
+          margin-bottom: 72px;
+
+          .card__statistics-item.likes {
+            .statistics-item__icon {
+              &:hover {
+                cursor: pointer;
+                transform: scale(1.2);
+              }
+            }
+          }
+        }
+
+        &--recipes {
+          margin-bottom: 104px;
+        }
+      }
+    }
+  }
+}

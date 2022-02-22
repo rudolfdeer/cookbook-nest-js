@@ -1,0 +1,116 @@
+@import '../../styles/index.scss';
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 88px;
+  width: 100%;
+  font-size: 16px;
+
+  &__logo {
+    width: 112px;
+    height: 33px;
+    background: url('../../assets/images/logo-small.png') center no-repeat;
+  }
+
+  &__nav {
+    &__list {
+      @include nav-list;
+
+      justify-content: space-between;
+
+      &__item {
+        &:first-child {
+          margin-right: 72px;
+        }
+      }
+    }
+  }
+
+  &__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 284px;
+    height: 40px;
+
+    &__icon {
+      position: absolute;
+      left: 16px;
+      width: 23px;
+      height: 23px;
+
+      background: url('../../assets/images/search-icon-small.png') center
+        no-repeat;
+    }
+
+    &__input {
+      width: 100%;
+      height: 100%;
+      padding-left: 52px;
+      background-color: $grey-light;
+      border-radius: 10px;
+      border: none;
+    }
+  }
+
+  &__btn {
+    @include button-light;
+
+    width: 225px;
+    height: 54px;
+  }
+
+  &__login {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 4px;
+      background: url('../../assets/images/Person.png') center no-repeat;
+    }
+
+    &:hover {
+      a {
+        color: $primary-yellow;
+      }
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .header {
+    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
+
+    a {
+      margin-bottom: 24px;
+    }
+
+    &__nav {
+      margin-bottom: 24px;
+    }
+
+    &__search {
+      margin-bottom: 24px;
+    }
+
+    &__btn {
+      margin-bottom: 24px;
+    }
+
+    &__login {
+      align-items: center;
+
+      a {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

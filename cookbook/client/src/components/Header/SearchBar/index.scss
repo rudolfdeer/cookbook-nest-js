@@ -1,0 +1,40 @@
+@import '../../../styles/index.scss';
+
+.header {
+  &__search {
+    &__result {
+      position: absolute;
+      z-index: 333;
+      width: 100%;
+      top: 70px;
+      left: 0;
+      background: $white;
+      padding: 8px;
+      border-radius: 10px;
+
+      &__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        &__item {
+          margin-bottom: 12px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          a {
+            color: $primary-yellow;
+            font-weight: bold;
+            font-size: 16px;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}
