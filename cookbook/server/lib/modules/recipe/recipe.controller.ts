@@ -2,6 +2,7 @@ import { Controller, Get, Post, Delete, Put, Param, Body, UseGuards, Request, Us
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'lib/constants/multer.config';
+import { UserId } from 'lib/constants/user.decorator';
 import { Recipe } from 'lib/data-access/entities/recipe.entity';
 import { RecipeComment } from 'lib/data-access/entities/recipeComment.entity';
 import { RecipeService } from './recipe.service';
@@ -22,22 +23,19 @@ export class RecipeController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  async create(@Body() body: Recipe, @Request() req) {
-    const userId = req.user.id;
+  async create(@Body() body: Recipe, @UserId() userId: number) {
     return this.recipesService.create(body, userId);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Post(':id')
-  async createComment(@Param('id') id: string, @Body() body: RecipeComment, @Request() req) {
-    const userId = req.user.id;
+  async createComment(@Param('id') id: string, @Body() body: RecipeComment, @UserId() userId: number) {
     return this.recipesService.createComment(id, userId, body)
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Post(':id/like')
-  async like(@Param('id') id: string, @Request() req) {
-    const userId = req.user.id;
+  async like(@Param('id') id: string, @UserId() userId: number) {
     return this.recipesService.like(id, userId);
   }
 

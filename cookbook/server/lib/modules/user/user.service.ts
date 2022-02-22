@@ -151,7 +151,7 @@ export class UserService {
     return user;
   }
 
-  async uploadImage(id: string, fileName: string) {
+  async uploadImage(id: number, fileName: string) {
 
     await this.userRepository.update(id, {
       image: fileName

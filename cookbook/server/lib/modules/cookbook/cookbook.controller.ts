@@ -2,6 +2,7 @@ import { Controller, Get, Post, Delete, Put, Param, Body, UseGuards, Request, Us
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'lib/constants/multer.config';
+import { UserId } from 'lib/constants/user.decorator';
 import { Cookbook } from 'lib/data-access/entities/cookbook.entity';
 import { CookbookComment } from 'lib/data-access/entities/cookbookComment.entity';
 import { CookbookService } from './cookbook.service';
@@ -22,22 +23,19 @@ export class CookbookController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  async create(@Body() body: Cookbook, @Request() req) {
-    const userId = req.user.id;
+  async create(@Body() body: Cookbook, @UserId() userId: number) {
     return this.cookbooksService.create(body, userId);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Post(':id')
-  async createComment(@Param('id') id: string, @Body() body: CookbookComment, @Request() req) {
-    const userId = req.user.id;
+  async createComment(@Param('id') id: string, @Body() body: CookbookComment, @UserId() userId: number) {
     return this.cookbooksService.createComment(id, userId, body)
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Post(':id/like')
-  async like(@Param('id') id: string,  @Request() req) {
-    const userId = req.user.id;
+  async like(@Param('id') id: string,  @UserId() userId: number) {
     return this.cookbooksService.like(id, userId)
   }
 

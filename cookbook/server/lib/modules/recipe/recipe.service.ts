@@ -10,6 +10,10 @@ export class RecipeService {
   constructor(
     @InjectRepository(Recipe)
     private recipeRepository: Repository<Recipe>,
+    @InjectRepository(RecipeLike)
+    private recipeLikeRepository: Repository<RecipeLike>,
+    @InjectRepository(RecipeComment)
+    private recipeCommentRepository: Repository<RecipeComment>,
   ) {}
 
   async findAll(): Promise<Recipe[]> {
@@ -29,7 +33,7 @@ export class RecipeService {
   }
 
   async create(body: Recipe, userId: number) {
-    const newRecipe = {...body, ...{ userId }}
+    const newRecipe = {...body, userId}
     const recipe = await this.recipeRepository.save(newRecipe);
     const id = recipe.id;
     const result = await this.recipeRepository.findOne(id);
@@ -47,21 +51,18 @@ export class RecipeService {
 
 
   async like(id: string, userId: number) {
-    const repository = getRepository(RecipeLike);
 
-    const instance = await repository.find({where: {
+    const instance = await this.recipeLikeRepository.find({where: {
       userId,
     }})
 
     if(instance) {
-      console.log(instance)
-      await repository.remove(instance);
+      await this.recipeLikeRepository.remove(instance);
     } else {
-      console.log('no')
       const like = new RecipeLike();
       like.recipeId = +id;
       like.userId = userId;
-      await repository.save(like);
+      await this.recipeLikeRepository.save(like);
     }
 
     const recipe = await this.recipeRepository.findOne(id);
@@ -69,15 +70,13 @@ export class RecipeService {
   }
 
   async createComment(id: string, userId: number, body: RecipeComment) {
-    const repository = getRepository(RecipeComment);
-
     const instance = new RecipeComment();
     instance.userId = userId;
     instance.recipeId = +id;
     instance.date = body.date;
     instance.text = body.text;
 
-    await repository.save(instance);
+    await this.recipeCommentRepository.save(instance);
 
     const recipe = await this.recipeRepository.findOne(id);
     return recipe;

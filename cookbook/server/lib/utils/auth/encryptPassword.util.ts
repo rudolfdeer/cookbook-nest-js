@@ -1,6 +1,6 @@
 import { CRYPTO } from 'lib/constants/auth';
 
-const crypto = require('crypto');
+import * as  crypto from'crypto';
 
 
 

@@ -10,6 +10,10 @@ export class CookbookService {
   constructor(
     @InjectRepository(Cookbook)
     private cookbookRepository: Repository<Cookbook>,
+    @InjectRepository(CookbookLike)
+    private cookbookLikeRepository: Repository<CookbookLike>,
+    @InjectRepository(CookbookComment)
+    private cookbookCommentRepository: Repository<CookbookComment>,
   ) {}
 
   async findAll(): Promise<Cookbook[]> {
@@ -29,7 +33,7 @@ export class CookbookService {
   }
 
   async create(body: Cookbook, userId: number) {
-    const newCookbook = {...body, ...{ userId }}
+    const newCookbook = {...body, userId}
     const cookbook = await this.cookbookRepository.save(newCookbook);
     const id = cookbook.id;
 
@@ -48,19 +52,17 @@ export class CookbookService {
 
 
   async like(id: string, userId: number) {
-    const repository = getRepository(CookbookLike);
-
-    const instance = await repository.find({where: {
+    const instance = await this.cookbookLikeRepository.find({where: {
       userId,
     }})
 
     if(instance) {
-      repository.remove(instance);
+      this.cookbookLikeRepository.remove(instance);
     } else {
       const like = new CookbookLike();
       like.cookbookId = +id;
       like.userId = userId;
-      await repository.save(like);
+      await this.cookbookLikeRepository.save(like);
     }
 
     const cookbook = await this.cookbookRepository.findOne(id);
@@ -68,15 +70,15 @@ export class CookbookService {
   }
 
   async createComment(id: string, userId: number, body: CookbookComment) {
-    const repository = getRepository(CookbookComment);
 
-    const instance = new CookbookComment();
-    instance.userId = userId;
-    instance.cookbookId = +id;
-    instance.date = body.date;
-    instance.text = body.text;
+    const instance = this.cookbookCommentRepository.create({
+      userId,
+      cookbookId: +id,
+      date: body.date,
+      text: body.text,
+    });
 
-    await repository.save(instance);
+    await this.cookbookCommentRepository.save(instance);
 
     const cookbook = await this.cookbookRepository.findOne(id);
     return cookbook;
