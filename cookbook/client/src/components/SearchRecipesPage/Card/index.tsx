@@ -19,8 +19,8 @@ type RecipeCardProps = {
   comments: IRecipeComment[];
   selectCard: Dispatch<SetStateAction<number>>;
   setVisible: Dispatch<SetStateAction<boolean>>;
-  loggedInUserId: number;
-  saveToUsersRecipes: (recipeId: number) => Promise<void>;
+  loggedInuserId: number;
+  saveTousersRecipes: (recipeId: number) => Promise<void>;
   likeRecipe: (recipeId: number) => Promise<void>;
 };
 
@@ -37,20 +37,20 @@ export default function RecipeCard(props: RecipeCardProps): JSX.Element {
     comments,
     setVisible,
     selectCard,
-    loggedInUserId,
-    saveToUsersRecipes,
+    loggedInuserId,
+    saveTousersRecipes,
     likeRecipe,
   } = props;
 
   const [isBtnVisible, setBtnVisible] = useState(false);
 
   const saveRecipe = () => {
-    saveToUsersRecipes(id);
+    saveTousersRecipes(id);
     setBtnVisible(false);
   };
 
-  const likeUserIds = likes.map((el) => el.UserId);
-  const commentedUsersIds = comments.map((el) => el.UserId);
+  const likeuserIds = likes.map((el) => el.userId);
+  const commentedusersIds = comments.map((el) => el.userId);
 
   const btnClone = (
     <div className="card__statistics-item__menu">
@@ -65,13 +65,8 @@ export default function RecipeCard(props: RecipeCardProps): JSX.Element {
 
   return (
     <div className="card">
-      <div
-        className="card__image"
-      >
-        <img
-                src={`${SERVER_URL}/${image}`}
-                alt="Recipe image"
-              />
+      <div className="card__image">
+        <img src={`${SERVER_URL}/${image}`} alt="Recipe image" />
       </div>
       <div className="card__content">
         <div className="card__info-container">
@@ -96,11 +91,19 @@ export default function RecipeCard(props: RecipeCardProps): JSX.Element {
               {views} <span>{t('VIEWS')}</span>
             </div>
             <div className="card__statistics-item--likes">
-              <LikesIcon likeUserIds={likeUserIds} loggedInUserId={loggedInUserId} likeRecipe = {likeRecipe} id={id}/>
+              <LikesIcon
+                likeuserIds={likeuserIds}
+                loggedInuserId={loggedInuserId}
+                likeRecipe={likeRecipe}
+                id={id}
+              />
               {likes.length} <span>{t('LIKES')}</span>
             </div>
             <div className="card__statistics-item comments">
-              <CommentsIcon commentedUsersIds={commentedUsersIds} loggedInUserId={loggedInUserId}/>
+              <CommentsIcon
+                commentedusersIds={commentedusersIds}
+                loggedInuserId={loggedInuserId}
+              />
               {comments.length} <span>{t('COMMENTS')}</span>
             </div>
           </div>
@@ -119,7 +122,7 @@ export default function RecipeCard(props: RecipeCardProps): JSX.Element {
             <circle cx="10" cy="2" r="2" fill="#dadada" />
             <circle cx="18" cy="2" r="2" fill="#dadada" />
           </svg>
-          {loggedInUserId && isBtnVisible ? btnClone : null}
+          {loggedInuserId && isBtnVisible ? btnClone : null}
         </div>
       </div>
     </div>

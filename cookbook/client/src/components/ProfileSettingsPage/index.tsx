@@ -11,16 +11,16 @@ import './index.scss';
 
 type ProfileSettingsPageProps = {
   user: IUser;
-  deleteUser: () => Promise<void>;
-  updateUser: (data: IUserRequestBody) => Promise<void>;
+  deleteuser: () => Promise<void>;
+  updateuser: (data: IUserRequestBody) => Promise<void>;
   changePassword: (password: string) => Promise<void>;
   changeEmail: (email: string) => Promise<void>;
-  updateUsersPhoto: (data: FormData) => Promise<void>;
+  updateusersPhoto: (data: FormData) => Promise<void>;
   signOut: () => Promise<void>;
 };
 
 export default function ProfileSettingsPage(
-  props: ProfileSettingsPageProps,
+  props: ProfileSettingsPageProps
 ): JSX.Element {
   if (!props.user) {
     return <Redirect to={ROUTES.HOME} />;
@@ -30,16 +30,14 @@ export default function ProfileSettingsPage(
 
   const {
     user,
-    deleteUser,
-    updateUser,
+    deleteuser,
+    updateuser,
     changePassword,
     changeEmail,
     signOut,
-    updateUsersPhoto,
+    updateusersPhoto,
   } = props;
-  const {
-    name, email, bio, image,
-  } = user;
+  const { name, email, bio, image } = user;
 
   const [isBioDisabled, setBioDisabled] = useState(true);
   const [isNameDisabled, setNameDisabled] = useState(true);
@@ -50,7 +48,7 @@ export default function ProfileSettingsPage(
   const [newEmail, setNewEmail] = useState(email);
   const [newPassword, setNewPassword] = useState('');
   const [photoSrc, setPhotoSrc] = useState(
-    `${SERVER_URL}/${image}` || './assets/images/photo-mask.png',
+    `${SERVER_URL}/${image}` || './assets/images/photo-mask.png'
   );
 
   const onPhotoChange = async (e: React.FormEvent) => {
@@ -59,7 +57,7 @@ export default function ProfileSettingsPage(
 
     const data = new FormData();
     data.append('photo', file);
-    await updateUsersPhoto(data);
+    await updateusersPhoto(data);
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -91,7 +89,7 @@ export default function ProfileSettingsPage(
                 />
                 <img
                   src={photoSrc}
-                  alt="User photo"
+                  alt="user photo"
                   className="profile-page--settings__photo__image--opacity"
                 />
               </label>
@@ -129,7 +127,7 @@ export default function ProfileSettingsPage(
                     onClick={(e) => {
                       e.preventDefault();
                       setBioDisabled(true);
-                      updateUser({
+                      updateuser({
                         name: newName,
                         bio: newBio,
                       });
@@ -143,9 +141,6 @@ export default function ProfileSettingsPage(
             <ul className="nav__list">
               <li className="list__item">
                 <Link to={ROUTES.PROFILE_SAVED}>{t('SAVED')}</Link>
-              </li>
-              <li className="list__item">
-                <Link to={ROUTES.PROFILE_COOKBOOKS}>{t('MY_COOKBOOKS')}</Link>
               </li>
               <li className="list__item">
                 <Link to={ROUTES.PROFILE_RECIPES}>{t('MY_RECIPES')}</Link>
@@ -193,7 +188,7 @@ export default function ProfileSettingsPage(
                   onClick={(e) => {
                     e.preventDefault();
                     setNameDisabled(true);
-                    updateUser({
+                    updateuser({
                       name: newName,
                       photo: photoSrc,
                       bio: newBio,
@@ -296,7 +291,7 @@ export default function ProfileSettingsPage(
               <button
                 className="profile-page--settings__btns__btn--delete"
                 onClick={() => {
-                  deleteUser();
+                  deleteuser();
                 }}
               >
                 {t('DELETE_ACCOUNT_BTN')}

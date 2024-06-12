@@ -27,19 +27,19 @@ export const signOut =
     dispatch(userActions.signOut());
   };
 
-export const deleteUser =
+export const deleteuser =
   () =>
   async (dispatch: Dispatch): Promise<void> => {
-    await userApi.deleteUser();
+    await userApi.deleteuser();
 
     dispatch(userActions.delete());
   };
 
-export const updateUser =
+export const updateuser =
   (data: IUserRequestBody) =>
   async (dispatch: Dispatch): Promise<void> => {
-    await userApi.updateUser(data);
-    const user = await userApi.getLoggedInUser();
+    await userApi.updateuser(data);
+    const user = await userApi.getLoggedInuser();
 
     dispatch(userActions.update(user));
   };
@@ -48,7 +48,7 @@ export const changePassword =
   (password: string) =>
   async (dispatch: Dispatch): Promise<void> => {
     await userApi.changePassword(password);
-    const user = await userApi.getLoggedInUser();
+    const user = await userApi.getLoggedInuser();
 
     dispatch(userActions.update(user));
   };
@@ -57,55 +57,55 @@ export const changeEmail =
   (email: string) =>
   async (dispatch: Dispatch): Promise<void> => {
     await userApi.changeEmail(email);
-    const user = await userApi.getLoggedInUser();
+    const user = await userApi.getLoggedInuser();
 
     dispatch(userActions.update(user));
   };
 
-export const saveToUsersCookbooks =
+export const saveTousersCookbooks =
   (cookbookId: number) =>
   async (dispatch: Dispatch): Promise<void> => {
-    const user = await userApi.getLoggedInUser();
+    const user = await userApi.getLoggedInuser();
     const { Cookbook_Saveds } = user;
     const savedCookbooksIds = Cookbook_Saveds.map((el) => el.CookbookId);
     if (savedCookbooksIds.indexOf(cookbookId) > -1) {
       dispatch(userActions.update(user));
     } else {
       savedCookbooksIds.push(cookbookId);
-      await userApi.updateUser({ savedCookbooksIds });
-      const updatedUser = await userApi.getLoggedInUser();
-      dispatch(userActions.update(updatedUser));
+      await userApi.updateuser({ savedCookbooksIds });
+      const updateduser = await userApi.getLoggedInuser();
+      dispatch(userActions.update(updateduser));
     }
   };
 
-export const saveToUsersRecipes =
+export const saveTousersRecipes =
   (recipeId: number) =>
   async (dispatch: Dispatch): Promise<void> => {
-    const user = await userApi.getLoggedInUser();
+    const user = await userApi.getLoggedInuser();
     const { Recipe_Saveds } = user;
     const savedRecipesIds = Recipe_Saveds.map((el) => el.RecipeId);
     if (savedRecipesIds.indexOf(recipeId) > -1) {
       dispatch(userActions.update(user));
     } else {
       savedRecipesIds.push(recipeId);
-      await userApi.updateUser({ savedRecipesIds });
-      const updatedUser = await userApi.getLoggedInUser();
-      dispatch(userActions.update(updatedUser));
+      await userApi.updateuser({ savedRecipesIds });
+      const updateduser = await userApi.getLoggedInuser();
+      dispatch(userActions.update(updateduser));
     }
   };
 
-export const getLoggedInUser =
+export const getLoggedInuser =
   () =>
   async (dispatch: Dispatch): Promise<void> => {
-    const user = await userApi.getLoggedInUser();
+    const user = await userApi.getLoggedInuser();
 
     dispatch(userActions.update(user));
   };
 
-export const updateUsersPhoto =
+export const updateusersPhoto =
   (data: FormData) =>
   async (dispatch: Dispatch): Promise<void> => {
-    const user = await userApi.updateUsersPhoto(data);
+    const user = await userApi.updateusersPhoto(data);
 
     dispatch(userActions.updatePhoto(user));
   };

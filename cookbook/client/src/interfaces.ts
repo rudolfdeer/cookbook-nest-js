@@ -24,10 +24,10 @@ export interface IRecipe {
   ingredients: string[];
   time: number;
   views: number;
-  UserId: number;
-  User: IUser;
-  Recipe_Comments: IRecipeComment[];
-  Recipe_Likes: IRecipeLike[];
+  userId: number;
+  user: IUser;
+  comments: IRecipeComment[];
+  likes: IRecipeLike[];
 }
 
 export interface ICookbook {
@@ -37,16 +37,16 @@ export interface ICookbook {
   image: string;
   tags: string[];
   views: number;
-  UserId: number;
-  User: IUser;
-  Recipe_Cookbooks: IRecipeCookbook[];
-  Cookbook_Comments: ICookbookComment[];
-  Cookbook_Likes: ICookbookLike[];
+  userId: number;
+  user: IUser;
+  recipes: IRecipeCookbook[];
+  comments: ICookbookComment[];
+  likes: ICookbookLike[];
 }
 
 export interface IRecipeLike {
   RecipeId: number;
-  UserId: number;
+  userId: number;
 }
 
 export interface IRecipeComment {
@@ -54,13 +54,13 @@ export interface IRecipeComment {
   text: string;
   date: string;
   RecipeId: number;
-  UserId: number;
-  User?: IUser;
+  userId: number;
+  user?: IUser;
 }
 
 export interface IRecipeSaved {
   RecipeId: number;
-  UserId: number;
+  userId: number;
   Recipe?: IRecipe;
 }
 
@@ -72,12 +72,12 @@ export interface IRecipeCookbook {
 
 export interface ICookbookLike {
   CookbookId: number;
-  UserId: number;
+  userId: number;
 }
 
 export interface ICookbookSaved {
   CookbookId: number;
-  UserId: number;
+  userId: number;
   Cookbook?: ICookbook;
 }
 
@@ -86,8 +86,8 @@ export interface ICookbookComment {
   text: string;
   date: string;
   CookbookId: number;
-  UserId: number;
-  User?: IUser;
+  userId: number;
+  user?: IUser;
 }
 
 export interface IRecipeRequestBody {
@@ -96,8 +96,8 @@ export interface IRecipeRequestBody {
   ingredients: string;
   directions: string;
   time?: number;
-  views?:number;
-  likeUserIds?: number[];
+  views?: number;
+  likeuserIds?: number[];
 }
 
 export interface ICookbookRequestBody {
@@ -106,7 +106,7 @@ export interface ICookbookRequestBody {
   recipesIds: number[];
   tags?: string[];
   views?: number;
-  likeUserIds?: number[];
+  likeuserIds?: number[];
   image?: File;
 }
 

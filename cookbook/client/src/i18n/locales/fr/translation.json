@@ -22,7 +22,7 @@
   "COOKING_TIME_MIN": "Temps de préparation, min.",
   "CREATED_CB": "Livres créés",
   "CREATE_ACCOUNT": "Créer nouveau compte",
-  "CREATE_COOKBOOK_BTN": "Créez votre livre de recettes",
+  "CREATE_RECIPE_BTN": "Créez votre recette",
   "CREATE_NEW_COOKBOOK": "Créer un livre de recettes",
   "CREATE_NEW_RECIPE": "Créer une recette",
   "DELETE_ACCOUNT_BTN": "Supprimer mon profil",
@@ -76,7 +76,7 @@
     "Philippines",
     "Sushis japonais"
   ],
-  "SEARCH_USERS": "Trouver des utilisateurs...",
+  "SEARCH_userS": "Trouver des utilisateurs...",
   "SHOW_ALL_BTN": "Afficher toutes les recettes",
   "SHOW_MORE_BTN": "Afficher plus",
   "SIGN_IN": "Se connecter",

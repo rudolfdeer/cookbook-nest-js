@@ -13,31 +13,24 @@ import SERVER_URL from '../../../constants/serverUrl';
 type PopUpCookbookProps = {
   setPopUpCookbookVisible: Dispatch<SetStateAction<boolean>>;
   cookbook: ICookbook;
-  loggedInUserId: number;
+  loggedInuserId: number;
 };
 
 export default function PopUpCookbook(props: PopUpCookbookProps): JSX.Element {
   const { t } = useTranslation();
-  const { setPopUpCookbookVisible, cookbook, loggedInUserId } = props;
-  const {
-    image,
-    description,
-    title,
-    User,
-    Cookbook_Likes,
-    Cookbook_Comments,
-    Recipe_Cookbooks,
-  } = cookbook;
+  const { setPopUpCookbookVisible, cookbook, loggedInuserId } = props;
+  const { image, description, title, user, likes, comments, recipes } =
+    cookbook;
 
-  const likeUserIds = Cookbook_Likes.map((el) => el.UserId);
-  const commentedUsersIds = Cookbook_Comments.map((el) => el.UserId);
-  const recipes = Recipe_Cookbooks.map((el) => el.Recipe);
+  const likeuserIds = likes.map((el) => el.userId);
+  const commentedusersIds = comments.map((el) => el.userId);
+  const recipesInCb = recipes.map((el) => el.Recipe);
 
   function closePopUp(e: React.MouseEvent) {
     const target = e.target as HTMLElement;
     if (
-      target.classList.contains('overlay')
-      || target.classList.contains('overlay__btn')
+      target.classList.contains('overlay') ||
+      target.classList.contains('overlay__btn')
     ) {
       setPopUpCookbookVisible(false);
     }
@@ -52,7 +45,7 @@ export default function PopUpCookbook(props: PopUpCookbookProps): JSX.Element {
           </div>
 
           <div className="pop-up--users-cookbook__author">
-            <Link to={`${ROUTES.PROFILE_USER}/${User.id}`}>{User.name}</Link>
+            <Link to={`${ROUTES.PROFILE_user}/${user.id}`}>{user.name}</Link>
           </div>
           <div className="pop-up--users-cookbook__section--description">
             <div
@@ -71,17 +64,17 @@ export default function PopUpCookbook(props: PopUpCookbookProps): JSX.Element {
           <div className="pop-up--users-cookbook__section--statistics">
             <div className="card__statistics-item likes">
               <LikesIcon
-                likeUserIds={likeUserIds}
-                loggedInUserId={loggedInUserId}
+                likeuserIds={likeuserIds}
+                loggedInuserId={loggedInuserId}
               />
-              {Cookbook_Likes.length} {t('LIKES')}
+              {likes.length} {t('LIKES')}
             </div>
             <div className="card__statistics-item comments">
               <CommentsIcon
-                commentedUsersIds={commentedUsersIds}
-                loggedInUserId={loggedInUserId}
+                commentedusersIds={commentedusersIds}
+                loggedInuserId={loggedInuserId}
               />
-              {Cookbook_Comments.length} {t('COMMENTS')}
+              {comments.length} {t('COMMENTS')}
             </div>
           </div>
           <div className="pop-up--users-cookbook__section--recipes">
@@ -89,15 +82,15 @@ export default function PopUpCookbook(props: PopUpCookbookProps): JSX.Element {
               {t('RECIPES')}
             </div>
             <div className="pop-up--users-cookbook__section--recipes__cards">
-              {recipes?.map((el) => (
+              {recipesInCb?.map((el) => (
                 <PopUpRecipeCard
                   title={el.title}
-                  author={el.User}
+                  author={el.user}
                   views={el.views}
                   description={el.description}
-                  likes={el.Recipe_Likes.length}
+                  likes={el.likes.length}
                   image={el.image}
-                  comments={el.Recipe_Comments.length}
+                  comments={el.comments.length}
                   key={el.id}
                   setPopUpCookbookVisible={setPopUpCookbookVisible}
                 />

@@ -16,8 +16,8 @@ type RecipesPageProps = {
   getAllRecipes: () => void;
   sortRecipes: (order: string) => Promise<void>;
   filterRecipes: (cookingTime: number) => Promise<void>;
-  loggedInUserId: number | null;
-  saveToUsersRecipes: (recipeId: number) => Promise<void>;
+  loggedInuserId: number | null;
+  saveTousersRecipes: (recipeId: number) => Promise<void>;
   createComment: (recipeId: number, text: string) => Promise<void>;
   likeRecipe: (recipeId: number) => Promise<void>;
 };
@@ -28,8 +28,8 @@ export default function RecipesPage(props: RecipesPageProps): JSX.Element {
     getAllRecipes,
     sortRecipes,
     filterRecipes,
-    loggedInUserId,
-    saveToUsersRecipes,
+    loggedInuserId,
+    saveTousersRecipes,
     createComment,
     likeRecipe,
   } = props;
@@ -49,9 +49,7 @@ export default function RecipesPage(props: RecipesPageProps): JSX.Element {
     setCards(recipes.slice(offset - perPage, offset));
   }, [offset, recipes]);
 
-  const handlePageClick = (e: {
-    selected: number;
-  }) => {
+  const handlePageClick = (e: { selected: number }) => {
     const selectedPage = e.selected;
     setOffset((selectedPage + 1) * perPage);
   };
@@ -74,9 +72,6 @@ export default function RecipesPage(props: RecipesPageProps): JSX.Element {
           <div className="search-page__content">
             <nav className="search-page__nav">
               <ul className="search-page__nav__list">
-                <li className="list__item">
-                  <Link to="/cookbooks">{t('COOKBOOKS')}</Link>
-                </li>
                 <li className="list__item--selected">{t('RECIPES')}</li>
               </ul>
             </nav>
@@ -85,17 +80,17 @@ export default function RecipesPage(props: RecipesPageProps): JSX.Element {
                 <RecipeCard
                   id={el.id}
                   title={el.title}
-                  author={el.User}
+                  author={el.user}
                   views={el.views}
-                  comments={el.Recipe_Comments}
+                  comments={el.comments}
                   image={el.image}
                   description={el.description}
                   selectCard={setSelectedCardId}
                   setVisible={setVisible}
                   key={el.id}
-                  loggedInUserId={loggedInUserId}
-                  saveToUsersRecipes={saveToUsersRecipes}
-                  likes={el.Recipe_Likes}
+                  loggedInuserId={loggedInuserId}
+                  saveTousersRecipes={saveTousersRecipes}
+                  likes={el.likes}
                   likeRecipe={likeRecipe}
                 />
               ))}
@@ -117,8 +112,8 @@ export default function RecipesPage(props: RecipesPageProps): JSX.Element {
             <PopUpRecipeDetailed
               setVisible={setVisible}
               recipe={recipes?.find((el) => el.id === selectedCardId)}
-              loggedInUserId={loggedInUserId}
-              saveToUsersRecipes={saveToUsersRecipes}
+              loggedInuserId={loggedInuserId}
+              saveTousersRecipes={saveTousersRecipes}
               createComment={createComment}
             />
           ) : null}

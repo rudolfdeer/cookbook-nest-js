@@ -12,33 +12,35 @@ import SERVER_URL from '../../constants/serverUrl';
 
 import './index.scss';
 
-type ProfileUsersPageProps = {
+type ProfileusersPageProps = {
   cookbooks: ICookbook[];
-  getUsersCreatedCookbooks: (userId: number) => void;
-  loggedInUserId: number;
+  getusersCreatedCookbooks: (userId: number) => void;
+  loggedInuserId: number;
 };
 
-export default function ProfileUsersPage(
-  props: ProfileUsersPageProps,
+export default function ProfileusersPage(
+  props: ProfileusersPageProps
 ): JSX.Element {
   const { t } = useTranslation();
   const { userId } = useParams<{ userId: string }>();
-  const { cookbooks, loggedInUserId, getUsersCreatedCookbooks } = props;
-  const [user, setUser] = useState(null as IUser);
+  const { cookbooks, loggedInuserId, getusersCreatedCookbooks } = props;
+  const [user, setuser] = useState(null as IUser);
   const [isPopUpCookbookVisible, setPopUpCookbookVisible] = useState(false);
   const [selectedCookbookId, setSelectedCookbookId] = useState(0);
-  const photoSrc = user ? `${SERVER_URL}/${user.image}` : '../../assets/images/photo-mask.png';
+  const photoSrc = user
+    ? `${SERVER_URL}/${user.image}`
+    : '../../assets/images/photo-mask.png';
 
-  useEffect(() => getUsersCreatedCookbooks(+userId), [userId]);
+  useEffect(() => getusersCreatedCookbooks(+userId), [userId]);
 
   useEffect(() => {
     (async () => {
-      const response = await userApi.getUserById(+userId);
-      setUser(response);
+      const response = await userApi.getuserById(+userId);
+      setuser(response);
     })();
   }, []);
 
-  if (+userId === loggedInUserId) {
+  if (+userId === loggedInuserId) {
     return <Redirect to={ROUTES.PROFILE_COOKBOOKS} />;
   }
 
@@ -53,7 +55,7 @@ export default function ProfileUsersPage(
             <div className="profile-page--user__user__photo">
               <img
                 src={photoSrc}
-                alt="User photo"
+                alt="user photo"
                 className="profile-page--user__user__photo__image"
               />
             </div>
@@ -72,15 +74,15 @@ export default function ProfileUsersPage(
               <CardCookbook
                 id={el.id}
                 title={el.title}
-                author={el.User}
+                author={el.user}
                 views={el.views}
-                likes={el.Cookbook_Likes}
-                comments={el.Cookbook_Comments}
+                likes={el.likes}
+                comments={el.comments}
                 image={el.image}
                 description={el.description}
                 key={el.id}
                 setSelectedCookbookId={setSelectedCookbookId}
-                loggedInUserId={loggedInUserId}
+                loggedInuserId={loggedInuserId}
                 setPopUpCookbookVisible={setPopUpCookbookVisible}
               />
             ))}
@@ -89,7 +91,7 @@ export default function ProfileUsersPage(
             <PopUpCookbook
               setPopUpCookbookVisible={setPopUpCookbookVisible}
               cookbook={cookbooks.find((el) => el.id === selectedCookbookId)}
-              loggedInUserId={loggedInUserId}
+              loggedInuserId={loggedInuserId}
             />
           ) : null}
         </div>

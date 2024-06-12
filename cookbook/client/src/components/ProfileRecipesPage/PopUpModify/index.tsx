@@ -18,24 +18,31 @@ type PopUpModifyRecipeProps = {
     data: FormData,
     userId: number
   ) => Promise<void>;
-  loggedInUserId: number;
+  loggedInuserId: number;
 };
 
 export default function PopUpModifyRecipe(
-  props: PopUpModifyRecipeProps,
+  props: PopUpModifyRecipeProps
 ): JSX.Element {
   const {
     setModifyPopUpVisible,
     selectedRecipe,
     modifyRecipe,
-    loggedInUserId,
+    loggedInuserId,
     updateRecipesImage,
   } = props;
 
   const { t } = useTranslation();
 
   const {
-    id, title, image, description, directions, ingredients, views, Recipe_Likes,
+    id,
+    title,
+    image,
+    description,
+    directions,
+    ingredients,
+    views,
+    likes,
   } = selectedRecipe;
 
   const [imageSrc, setImageSrc] = useState(`${SERVER_URL}/${image}`);
@@ -61,7 +68,7 @@ export default function PopUpModifyRecipe(
 
     const data = new FormData();
     data.append('image', file);
-    await updateRecipesImage(id, data, loggedInUserId);
+    await updateRecipesImage(id, data, loggedInuserId);
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -224,10 +231,10 @@ export default function PopUpModifyRecipe(
                     directions: newDirections.join(','),
                     ingredients: newIngredients.join(','),
                     views,
-                    likeUserIds: Recipe_Likes.map((el) => el.UserId),
+                    likeuserIds: likes.map((el) => el.userId),
                   };
                   setModifyPopUpVisible(false);
-                  modifyRecipe(id, data, loggedInUserId);
+                  modifyRecipe(id, data, loggedInuserId);
                 }}
               >
                 {t('SAVE_BTN')}

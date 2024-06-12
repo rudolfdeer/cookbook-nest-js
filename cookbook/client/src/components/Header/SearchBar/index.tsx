@@ -8,14 +8,14 @@ import './index.scss';
 
 export default function SearchBar(): JSX.Element {
   const { t } = useTranslation();
-  const [users, setUsers] = useState([]);
+  const [users, setusers] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [list, setList] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await userApi.getAllUsers();
-      setUsers(response);
+      const response = await userApi.getAllusers();
+      setusers(response);
     })();
   }, []);
 
@@ -25,7 +25,9 @@ export default function SearchBar(): JSX.Element {
   }));
 
   const getResultList = () => {
-    const result = usersList.filter((el) => el.name.toLowerCase().includes(inputValue.toLowerCase()));
+    const result = usersList.filter((el) =>
+      el.name.toLowerCase().includes(inputValue.toLowerCase())
+    );
     return result;
   };
 
@@ -46,7 +48,7 @@ export default function SearchBar(): JSX.Element {
           handleChange(e);
           debounce(() => setList(getResultList()), 2000)();
         }}
-        placeholder={t('SEARCH_USERS')}
+        placeholder={t('SEARCH_userS')}
       />
       {inputValue.length > 0 && list.length > 0 ? (
         <div className="header__search__result">

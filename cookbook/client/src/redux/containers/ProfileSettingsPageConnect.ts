@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import ProfileSettingsPage from '../../components/ProfileSettingsPage';
 import { IState } from '../../interfaces';
 import {
-  deleteUser,
-  updateUser,
+  deleteuser,
+  updateuser,
   changePassword,
   changeEmail,
-  getLoggedInUser,
-  updateUsersPhoto,
+  getLoggedInuser,
+  updateusersPhoto,
   signOut,
 } from '../thunks/user';
 
@@ -19,16 +19,16 @@ function mapStateToProps(state: IState) {
 }
 const mapDispatchToProps = {
   signOut,
-  deleteUser,
-  updateUser,
+  deleteuser,
+  updateuser,
   changePassword,
   changeEmail,
-  updateUsersPhoto,
+  updateusersPhoto,
 };
 
 const ProfileSettingsPageConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ProfileSettingsPage);
 
 export default ProfileSettingsPageConnect;

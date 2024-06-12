@@ -10,22 +10,22 @@ import './index.scss';
 type PopUpRecipeSavedProps = {
   setRecipePopUpVisible: Dispatch<SetStateAction<boolean>>;
   recipe: IRecipe;
-  loggedInUserId: number;
+  loggedInuserId: number;
 };
 
 export default function PopUpRecipeSaved(
-  props: PopUpRecipeSavedProps,
+  props: PopUpRecipeSavedProps
 ): JSX.Element {
   const { t } = useTranslation();
-  const { setRecipePopUpVisible, recipe, loggedInUserId } = props;
+  const { setRecipePopUpVisible, recipe, loggedInuserId } = props;
 
   const {
     image,
     description,
     title,
-    User,
-    Recipe_Likes,
-    Recipe_Comments,
+    user,
+    likes,
+    comments,
     directions,
     ingredients,
   } = recipe;
@@ -37,8 +37,8 @@ export default function PopUpRecipeSaved(
     }
   };
 
-  const likeUserIds = Recipe_Likes.map((el) => el.UserId);
-  const commentedUsersIds = Recipe_Comments.map((el) => el.UserId);
+  const likeuserIds = likes.map((el) => el.userId);
+  const commentedusersIds = comments.map((el) => el.userId);
 
   return (
     <div className="overlay" onClick={(e) => closePopUp(e)}>
@@ -52,7 +52,7 @@ export default function PopUpRecipeSaved(
               <div className="pop-up--recipe__section--top">
                 <div className="pop-up--recipe__title">{title}</div>
               </div>
-              <div className="pop-up--recipe__author">{User.name}</div>
+              <div className="pop-up--recipe__author">{user.name}</div>
               <div className="pop-up--recipe__section--description">
                 <div className="pop-up--recipe__section--description__wrapper">
                   <div className="pop-up--recipe__section--description__title">
@@ -89,17 +89,17 @@ export default function PopUpRecipeSaved(
               <div className="pop-up--recipe__section--statistics">
                 <div className="card__statistics-item likes">
                   <LikesIcon
-                    likeUserIds={likeUserIds}
-                    loggedInUserId={loggedInUserId}
+                    likeuserIds={likeuserIds}
+                    loggedInuserId={loggedInuserId}
                   />
-                  {Recipe_Likes.length} <span>&nbsp;{t('LIKES')}</span>
+                  {likes.length} <span>&nbsp;{t('LIKES')}</span>
                 </div>
                 <div className="card__statistics-item comments">
                   <CommentsIcon
-                    commentedUsersIds={commentedUsersIds}
-                    loggedInUserId={loggedInUserId}
+                    commentedusersIds={commentedusersIds}
+                    loggedInuserId={loggedInuserId}
                   />
-                  {Recipe_Comments.length} <span>&nbsp;{t('COMMENTS')}</span>
+                  {comments.length} <span>&nbsp;{t('COMMENTS')}</span>
                 </div>
               </div>
             </div>

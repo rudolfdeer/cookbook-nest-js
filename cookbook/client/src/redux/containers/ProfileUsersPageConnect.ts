@@ -1,25 +1,25 @@
 import { connect } from 'react-redux';
-import ProfileUsersPage from '../../components/ProfileUsersPage';
+import ProfileusersPage from '../../components/ProfileUsersPage';
 import { IState } from '../../interfaces';
-import { getUsersCreatedCookbooks } from '../thunks/cookbooks';
+import { getusersCreatedCookbooks } from '../thunks/cookbooks';
 
 const mapStateToProps = (state: IState) => {
   const { cookbooks, user } = state;
-  const loggedInUserId = user ? user.id : null;
+  const loggedInuserId = user ? user.id : null;
 
   return {
     cookbooks,
-    loggedInUserId,
+    loggedInuserId,
   };
 };
 
 const mapDispatchToProps = {
-  getUsersCreatedCookbooks,
+  getusersCreatedCookbooks,
 };
 
-const ProfileUsersPageConnect = connect(
+const ProfileusersPageConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
-)(ProfileUsersPage);
+  mapDispatchToProps
+)(ProfileusersPage);
 
-export default ProfileUsersPageConnect;
+export default ProfileusersPageConnect;

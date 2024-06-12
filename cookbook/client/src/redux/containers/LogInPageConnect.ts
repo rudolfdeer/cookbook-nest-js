@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import LogInPage from '../../components/LogInPage';
 import { IState } from '../../interfaces';
-import { signIn, getLoggedInUser } from '../thunks/user';
+import { signIn, getLoggedInuser } from '../thunks/user';
 
 function mapStateToProps(state: IState) {
   const { user } = state;
@@ -13,12 +13,12 @@ function mapStateToProps(state: IState) {
 
 const mapDispatchToProps = {
   signIn,
-  getLoggedInUser,
+  getLoggedInuser,
 };
 
 const LogInPageConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(LogInPage);
 
 export default LogInPageConnect;

@@ -18,7 +18,7 @@ export default function ResultList(props: ResultListProps): JSX.Element {
           className="header__search__result__list__item"
           onClick={() => setSearchInput('')}
         >
-          <Link to={`${ROUTES.PROFILE_USER}/${el.id}`}>{el.name}</Link>
+          <Link to={`${ROUTES.PROFILE_user}/${el.id}`}>{el.name}</Link>
         </li>
       ))}
     </ul>

@@ -9,7 +9,7 @@ type RecipesReducer = typeof initialState;
 
 export default function recipesReducer(
   state = initialState,
-  action: AnyAction,
+  action: AnyAction
 ): RecipesReducer {
   switch (action.type) {
     case ACTION_TYPES.RECIPES_GET_ALL: {
@@ -30,7 +30,7 @@ export default function recipesReducer(
       switch (order) {
         case SortOrder.Likes: {
           resData = recipes.sort(
-            (a: IRecipe, b: IRecipe) => b.Recipe_Likes.length - a.Recipe_Likes.length,
+            (a: IRecipe, b: IRecipe) => b.likes.length - a.likes.length
           );
           break;
         }
@@ -53,19 +53,19 @@ export default function recipesReducer(
       const { recipes, cookingTime } = action.payload;
 
       const resData = recipes.filter(
-        (recipe: IRecipe) => recipe.time <= cookingTime,
+        (recipe: IRecipe) => recipe.time <= cookingTime
       );
 
       return [...resData];
     }
 
-    case ACTION_TYPES.RECIPES_GET_USERS_CREATED: {
+    case ACTION_TYPES.RECIPES_GET_userS_CREATED: {
       const { recipes } = action.payload;
 
       return [...recipes];
     }
 
-    case ACTION_TYPES.RECIPES_GET_USERS_SAVED: {
+    case ACTION_TYPES.RECIPES_GET_userS_SAVED: {
       const { user } = action.payload;
       const savedRecipes = user.Recipe_Saveds;
       const resData = savedRecipes.map((el: IRecipeSaved) => el.Recipe);
@@ -82,7 +82,7 @@ export default function recipesReducer(
     case ACTION_TYPES.RECIPES_CREATE: {
       const { recipes, userId } = action.payload;
       const usersRecipes = recipes.filter(
-        (recipe: IRecipe) => recipe.UserId === userId,
+        (recipe: IRecipe) => recipe.userId === userId
       );
 
       return [...usersRecipes];
@@ -92,7 +92,7 @@ export default function recipesReducer(
       const { recipes, userId } = action.payload;
 
       const usersRecipes = recipes.filter(
-        (recipe: IRecipe) => recipe.UserId === userId,
+        (recipe: IRecipe) => recipe.userId === userId
       );
 
       return [...usersRecipes];
@@ -102,7 +102,7 @@ export default function recipesReducer(
       const { recipes, userId } = action.payload;
 
       const usersRecipes = recipes.filter(
-        (recipe: IRecipe) => recipe.UserId === userId,
+        (recipe: IRecipe) => recipe.userId === userId
       );
 
       return [...usersRecipes];

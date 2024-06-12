@@ -18,13 +18,13 @@ type ProfileSavedRecipeCardProps = {
   likes: IRecipeLike[];
   image: string;
   comments: IRecipeComment[];
-  loggedInUserId: number;
+  loggedInuserId: number;
   setRecipePopUpVisible: Dispatch<SetStateAction<boolean>>;
   setSelectedRecipeId: Dispatch<SetStateAction<number>>;
 };
 
 export default function ProfileSavedRecipeCard(
-  props: ProfileSavedRecipeCardProps,
+  props: ProfileSavedRecipeCardProps
 ): JSX.Element {
   const { t } = useTranslation();
   const {
@@ -38,11 +38,11 @@ export default function ProfileSavedRecipeCard(
     comments,
     setRecipePopUpVisible,
     setSelectedRecipeId,
-    loggedInUserId,
+    loggedInuserId,
   } = props;
 
-  const likeUserIds = likes.map((el) => el.UserId);
-  const commentedUsersIds = comments.map((el) => el.UserId);
+  const likeuserIds = likes.map((el) => el.userId);
+  const commentedusersIds = comments.map((el) => el.userId);
 
   return (
     <div className="card">
@@ -79,16 +79,16 @@ export default function ProfileSavedRecipeCard(
       <div className="card__info-container--bottom">
         <div className="card__statistics-item">
           <LikesIcon
-            likeUserIds={likeUserIds}
-            loggedInUserId={loggedInUserId}
+            likeuserIds={likeuserIds}
+            loggedInuserId={loggedInuserId}
             id={id}
           />
           {likes.length} {t('LIKES')}
         </div>
         <div className="card__statistics-item">
           <CommentsIcon
-            commentedUsersIds={commentedUsersIds}
-            loggedInUserId={loggedInUserId}
+            commentedusersIds={commentedusersIds}
+            loggedInuserId={loggedInuserId}
           />
           {comments.length} {t('COMMENTS')}
         </div>

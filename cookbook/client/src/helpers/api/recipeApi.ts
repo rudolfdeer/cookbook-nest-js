@@ -1,15 +1,15 @@
 import SERVER_URL from '../../constants/serverUrl';
-import {
-  IRecipe, IRecipeRequestBody,
-} from '../../interfaces';
+import { IRecipe, IRecipeRequestBody } from '../../interfaces';
 
 const base = `${SERVER_URL}/api`;
 const recipesUrl = `${base}/recipes/`;
 
 class RecipeApi {
-  async getUsersCreatedRecipes(userId: number) {
+  async getusersCreatedRecipes(userId: number) {
     const recipes = await this.getAllRecipes();
-    const filteredRecipes = recipes.filter((el: IRecipe) => el.UserId === userId);
+    const filteredRecipes = recipes.filter(
+      (el: IRecipe) => el.userId === userId
+    );
     return filteredRecipes;
   }
 
@@ -50,14 +50,8 @@ class RecipeApi {
   }
 
   async updateRecipe(recipeId: number, data: IRecipeRequestBody) {
-    const {
-      title,
-      description,
-      directions,
-      ingredients,
-      views,
-      likeUserIds,
-    } = data;
+    const { title, description, directions, ingredients, views, likeuserIds } =
+      data;
 
     const body = {
       title,
@@ -65,7 +59,7 @@ class RecipeApi {
       directions: directions.split(','),
       ingredients: ingredients.split(','),
       views,
-      likeUserIds,
+      likeuserIds,
     };
 
     const response = await fetch(`${recipesUrl}${recipeId}`, {

@@ -21,7 +21,6 @@
       }
 
       &__label {
-        
         position: relative;
         display: flex;
         margin-right: 40px;
@@ -46,7 +45,6 @@
         &:hover {
           cursor: pointer;
         }
-
       }
 
       &__image {
@@ -238,7 +236,7 @@
         }
       }
 
-      &__nav  {
+      &__nav {
         justify-content: center;
       }
     }
@@ -291,7 +289,6 @@
           &__label {
             width: auto;
             margin-right: 0;
-            
           }
 
           &__input {

@@ -4,14 +4,14 @@ import { IUser } from '../../interfaces';
 
 const initialState: null | IUser = null;
 
-type UserReducer = typeof initialState;
+type userReducer = typeof initialState;
 
 export default function userReducer(
   state = initialState,
-  action: AnyAction,
-): UserReducer {
+  action: AnyAction
+): userReducer {
   switch (action.type) {
-    case ACTION_TYPES.USER_UPDATE: {
+    case ACTION_TYPES.user_UPDATE: {
       const { user } = action.payload;
       return {
         ...state,
@@ -19,7 +19,7 @@ export default function userReducer(
       };
     }
 
-    case ACTION_TYPES.USER_UPDATE_PHOTO: {
+    case ACTION_TYPES.user_UPDATE_PHOTO: {
       const { user } = action.payload;
       return {
         ...state,
@@ -27,7 +27,7 @@ export default function userReducer(
       };
     }
 
-    case ACTION_TYPES.USER_SIGN_IN: {
+    case ACTION_TYPES.user_SIGN_IN: {
       const { user } = action.payload;
       return {
         ...state,
@@ -35,11 +35,11 @@ export default function userReducer(
       };
     }
 
-    case ACTION_TYPES.USER_SIGN_OUT: {
+    case ACTION_TYPES.user_SIGN_OUT: {
       return null;
     }
 
-    case ACTION_TYPES.USER_SIGN_UP: {
+    case ACTION_TYPES.user_SIGN_UP: {
       const { user } = action.payload;
 
       return {
@@ -48,7 +48,7 @@ export default function userReducer(
       };
     }
 
-    case ACTION_TYPES.USER_DELETE: {
+    case ACTION_TYPES.user_DELETE: {
       return null;
     }
 

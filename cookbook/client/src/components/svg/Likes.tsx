@@ -4,37 +4,38 @@ import Colors from '../../constants/colors';
 import getDefaultColor from '../../helpers/getIconColor';
 
 type LikesIconProps = {
-  loggedInUserId?: number;
-  likeUserIds?: number[];
+  loggedInuserId?: number;
+  likeuserIds?: number[];
   likeCookbook?: (cookbookId: number) => Promise<void>;
   likeRecipe?: (recipeId: number) => Promise<void>;
   id?: number;
 };
 
 export default function LikesIcon(props: LikesIconProps): JSX.Element {
-  const {
-    loggedInUserId, likeUserIds, likeCookbook, id, likeRecipe,
-  } = props;
+  const { loggedInuserId, likeuserIds, likeCookbook, id, likeRecipe } = props;
 
-  const defaultColor = getDefaultColor(loggedInUserId, likeUserIds);
+  const defaultColor = getDefaultColor(loggedInuserId, likeuserIds);
   const [color, setColor] = useState(defaultColor);
 
-  useEffect(() => setColor(getDefaultColor(loggedInUserId, likeUserIds)));
+  useEffect(() => setColor(getDefaultColor(loggedInuserId, likeuserIds)));
 
   const changeColor = () => {
     setColor(color === Colors.Yellow ? Colors.Grey : Colors.Yellow);
   };
 
-  const like = useCallback(throttle(() => {
-    if (!props.loggedInUserId) return;
-    if (likeCookbook) {
-      likeCookbook(id);
-    }
-    if (likeRecipe) {
-      likeRecipe(id);
-    }
-    changeColor();
-  }, 1000), []);
+  const like = useCallback(
+    throttle(() => {
+      if (!props.loggedInuserId) return;
+      if (likeCookbook) {
+        likeCookbook(id);
+      }
+      if (likeRecipe) {
+        likeRecipe(id);
+      }
+      changeColor();
+    }, 1000),
+    []
+  );
 
   return (
     <svg

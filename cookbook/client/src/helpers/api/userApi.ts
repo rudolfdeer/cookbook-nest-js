@@ -1,19 +1,17 @@
 import SERVER_URL from '../../constants/serverUrl';
-import {
-  IAuthRequestBody, IUser, IUserRequestBody,
-} from '../../interfaces';
+import { IAuthRequestBody, IUser, IUserRequestBody } from '../../interfaces';
 
 const base = `${SERVER_URL}/api`;
 const userUrl = `${base}/user/`;
 
-class UserApi {
-  async getUserById(userId: number): Promise<IUser> {
+class userApi {
+  async getuserById(userId: number): Promise<IUser> {
     const response = await fetch(`${userUrl}${userId}`);
     const result = await response.json();
     return result;
   }
 
-  async getLoggedInUser(): Promise<IUser> {
+  async getLoggedInuser(): Promise<IUser> {
     const response = await fetch(`${userUrl}`, {
       credentials: 'include',
     });
@@ -56,14 +54,14 @@ class UserApi {
     });
   }
 
-  async deleteUser() {
+  async deleteuser() {
     await fetch(`${userUrl}`, {
       method: 'DELETE',
       credentials: 'include',
     });
   }
 
-  async updateUser(body: IUserRequestBody) {
+  async updateuser(body: IUserRequestBody) {
     const response = await fetch(`${userUrl}`, {
       method: 'PUT',
       body: JSON.stringify(body),
@@ -113,14 +111,14 @@ class UserApi {
     return result;
   }
 
-  async getAllUsers() {
+  async getAllusers() {
     const response = await fetch(`${userUrl}users/all`);
 
     const result = await response.json();
     return result;
   }
 
-  async updateUsersPhoto(data: FormData) {
+  async updateusersPhoto(data: FormData) {
     const response = await fetch(`${userUrl}update-photo`, {
       method: 'POST',
       body: data,
@@ -132,4 +130,4 @@ class UserApi {
   }
 }
 
-export default new UserApi();
+export default new userApi();

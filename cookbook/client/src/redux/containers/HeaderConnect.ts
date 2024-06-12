@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Header from '../../components/Header';
 import { IState } from '../../interfaces';
-import { getLoggedInUser } from '../thunks/user';
+import { getLoggedInuser } from '../thunks/user';
 
 const mapStateToProps = (state: IState) => {
   const { user } = state;
@@ -11,7 +11,7 @@ const mapStateToProps = (state: IState) => {
 };
 
 const mapDispatchToProps = {
-  getLoggedInUser,
+  getLoggedInuser,
 };
 
 const HeaderConnect = connect(mapStateToProps, mapDispatchToProps)(Header);

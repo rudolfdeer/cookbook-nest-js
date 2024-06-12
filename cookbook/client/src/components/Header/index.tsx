@@ -9,14 +9,14 @@ import './index.scss';
 
 type HeaderProps = {
   user: IUser;
-  getLoggedInUser: () => void;
+  getLoggedInuser: () => void;
 };
 
 export default function Header(props: HeaderProps): JSX.Element {
-  const { user, getLoggedInUser } = props;
+  const { user, getLoggedInuser } = props;
   const { t } = useTranslation();
 
-  useEffect(() => getLoggedInUser(), []);
+  useEffect(() => getLoggedInuser(), []);
 
   return (
     <header className="header">
@@ -25,9 +25,7 @@ export default function Header(props: HeaderProps): JSX.Element {
       </Link>
       <nav className="header__nav">
         <ul className="header__nav__list">
-          <li className="header__nav__list__item">
-            <Link to={ROUTES.COOKBOOKS}>{t('COOKBOOKS')}</Link>
-          </li>
+
           <li className="header__nav__list__item">
             <Link to={ROUTES.RECIPES}>{t('RECIPES')}</Link>
           </li>
@@ -36,11 +34,11 @@ export default function Header(props: HeaderProps): JSX.Element {
       <SearchBar />
       {user ? (
         <button className="header__btn">
-          <Link to={ROUTES.PROFILE_COOKBOOKS}>{t('CREATE_COOKBOOK_BTN')}</Link>
+          <Link to={ROUTES.PROFILE_RECIPES}>{t('CREATE_RECIPE_BTN')}</Link>
         </button>
       ) : (
         <button className="header__btn">
-          <Link to={ROUTES.LOG_IN}>{t('CREATE_COOKBOOK_BTN')}</Link>
+          <Link to={ROUTES.LOG_IN}>{t('CREATE_RECIPE_BTN')}</Link>
         </button>
       )}
       {user ? (

@@ -2,16 +2,14 @@ import React from 'react';
 import getDefaultColor from '../../helpers/getIconColor';
 
 type CommentsIconProps = {
-  loggedInUserId?: number;
-  commentedUsersIds?: number[];
+  loggedInuserId?: number;
+  commentedusersIds?: number[];
 };
 
 export default function CommentsIcon(props: CommentsIconProps): JSX.Element {
-  const {
-    loggedInUserId, commentedUsersIds,
-  } = props;
+  const { loggedInuserId, commentedusersIds } = props;
 
-  const defaultColor = getDefaultColor(loggedInUserId, commentedUsersIds);
+  const defaultColor = getDefaultColor(loggedInuserId, commentedusersIds);
 
   return (
     <svg

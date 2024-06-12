@@ -9,14 +9,14 @@ import './index.scss';
 type LogInPageProps = {
   user: IUser;
   signIn: (loginInfo: IAuthRequestBody) => Promise<void>;
-  getLoggedInUser: () => Promise<void>;
+  getLoggedInuser: () => Promise<void>;
 };
 
 export default function LogInPage(props: LogInPageProps): JSX.Element {
-  const { user, signIn, getLoggedInUser } = props;
+  const { user, signIn, getLoggedInuser } = props;
 
   useEffect(() => {
-    getLoggedInUser();
+    getLoggedInuser();
   }, []);
 
   if (user) {

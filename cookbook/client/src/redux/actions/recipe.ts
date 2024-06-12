@@ -33,16 +33,16 @@ class RecipeActions {
 
   getCreatedRecipes(recipes: IRecipe[]) {
     return {
-      type: ACTION_TYPES.RECIPES_GET_USERS_CREATED,
+      type: ACTION_TYPES.RECIPES_GET_userS_CREATED,
       payload: {
         recipes,
       },
     };
   }
 
-  getUsersSaved(user: IUser) {
+  getusersSaved(user: IUser) {
     return {
-      type: ACTION_TYPES.RECIPES_GET_USERS_SAVED,
+      type: ACTION_TYPES.RECIPES_GET_userS_SAVED,
       payload: {
         user,
       },

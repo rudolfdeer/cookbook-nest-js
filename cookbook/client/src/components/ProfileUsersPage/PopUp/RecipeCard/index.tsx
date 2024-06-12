@@ -19,12 +19,10 @@ type PopUpRecipeCardProps = {
 };
 
 export default function PopUpRecipeCard(
-  props: PopUpRecipeCardProps,
+  props: PopUpRecipeCardProps
 ): JSX.Element {
   const { t } = useTranslation();
-  const {
-    views, image, description, title, author, likes, comments,
-  } = props;
+  const { views, image, description, title, author, likes, comments } = props;
 
   return (
     <div className="card">

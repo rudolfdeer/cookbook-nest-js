@@ -20,11 +20,11 @@ type ProfileRecipeCardProps = {
   setModifyPopUpVisible: Dispatch<SetStateAction<boolean>>;
   setSelectedRecipeId: Dispatch<SetStateAction<number>>;
   deleteRecipe: (recipeId: number, userId: number) => Promise<void>;
-  loggedInUserId: number;
+  loggedInuserId: number;
 };
 
 export default function ProfileRecipeCard(
-  props: ProfileRecipeCardProps,
+  props: ProfileRecipeCardProps
 ): JSX.Element {
   const {
     id,
@@ -36,7 +36,7 @@ export default function ProfileRecipeCard(
     comments,
     setModifyPopUpVisible,
     setSelectedRecipeId,
-    loggedInUserId,
+    loggedInuserId,
     deleteRecipe,
     likes,
   } = props;
@@ -50,7 +50,7 @@ export default function ProfileRecipeCard(
         className="card__statistics-item__menu__btn--delete"
         onClick={() => {
           setBtnDeleteVisible(false);
-          deleteRecipe(id, loggedInUserId);
+          deleteRecipe(id, loggedInuserId);
         }}
       >
         {t('DELETE_RECIPE')}
@@ -58,7 +58,7 @@ export default function ProfileRecipeCard(
     </div>
   );
 
-  const likeUserIds = likes.map((el) => el.UserId);
+  const likeuserIds = likes.map((el) => el.userId);
 
   return (
     <div className="card">
@@ -89,8 +89,8 @@ export default function ProfileRecipeCard(
             </div>
             <div className="card__statistics-item">
               <LikesIcon
-                likeUserIds={likeUserIds}
-                loggedInUserId={loggedInUserId}
+                likeuserIds={likeuserIds}
+                loggedInuserId={loggedInuserId}
                 id={id}
               />
               {likes.length} <span>{t('LIKES')}</span>

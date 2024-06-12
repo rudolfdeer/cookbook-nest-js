@@ -7,16 +7,16 @@ import {
   createComment,
   likeRecipe,
 } from '../thunks/recipes';
-import { saveToUsersRecipes } from '../thunks/user';
+import { saveTousersRecipes } from '../thunks/user';
 import { IState } from '../../interfaces';
 
 function mapStateToProps(state: IState) {
   const { user, recipes } = state;
-  const loggedInUserId = user ? user.id : null;
+  const loggedInuserId = user ? user.id : null;
 
   return {
     recipes,
-    loggedInUserId,
+    loggedInuserId,
   };
 }
 
@@ -24,14 +24,14 @@ const mapDispatchToProps = {
   getAllRecipes,
   sortRecipes,
   filterRecipes,
-  saveToUsersRecipes,
+  saveTousersRecipes,
   createComment,
   likeRecipe,
 };
 
 const RecipesPageConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(RecipesPage);
 
 export default RecipesPageConnect;

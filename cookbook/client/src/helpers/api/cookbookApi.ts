@@ -1,15 +1,15 @@
 import SERVER_URL from '../../constants/serverUrl';
-import {
-  ICookbook, ICookbookRequestBody,
-} from '../../interfaces';
+import { ICookbook, ICookbookRequestBody } from '../../interfaces';
 
 const base = `${SERVER_URL}/api`;
 const cookbooksUrl = `${base}/cookbooks/`;
 
 class CookbookApi {
-  async getUsersCreatedCookbooks(userId: number) {
+  async getusersCreatedCookbooks(userId: number) {
     const cookbooks = await this.getAllCookbooks();
-    const filteredCookbooks = cookbooks.filter((el: ICookbook) => el.UserId === userId);
+    const filteredCookbooks = cookbooks.filter(
+      (el: ICookbook) => el.userId === userId
+    );
     return filteredCookbooks;
   }
 
@@ -62,19 +62,13 @@ class CookbookApi {
   }
 
   async updateCookbook(cookbookId: number, data: ICookbookRequestBody) {
-    const {
-      title,
-      description,
-      views,
-      likeUserIds,
-      recipesIds,
-    } = data;
+    const { title, description, views, likeuserIds, recipesIds } = data;
 
     const body = {
       title,
       description,
       views,
-      likeUserIds,
+      likeuserIds,
       recipesIds,
     };
 

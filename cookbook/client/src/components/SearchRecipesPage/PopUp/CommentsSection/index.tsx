@@ -7,24 +7,20 @@ import './index.scss';
 
 type CommentsSectionProps = {
   comments: IRecipeComment[];
-  loggedInUserId: number;
+  loggedInuserId: number;
   recipeId: number;
-  createComment: (
-    recipeId: number,
-    text: string
-  ) => Promise<void>;
+  createComment: (recipeId: number, text: string) => Promise<void>;
 };
 
 export default function CommentsSection(
-  props: CommentsSectionProps,
+  props: CommentsSectionProps
 ): JSX.Element {
   const { t } = useTranslation();
-  const {
-    comments, loggedInUserId, recipeId, createComment,
-  } = props;
+  const { comments, loggedInuserId, recipeId, createComment } = props;
   const [newComment, setNewComment] = useState('');
 
-  const getDate = (dateString: string) => dateString.split(' ').slice(0, 4).join(' ');
+  const getDate = (dateString: string) =>
+    dateString.split(' ').slice(0, 4).join(' ');
 
   const newCommentSection = (
     <div className="comment--new">
@@ -50,21 +46,19 @@ export default function CommentsSection(
 
   return (
     <>
-      {loggedInUserId ? newCommentSection : null}
+      {loggedInuserId ? newCommentSection : null}
       <div className="comments">
         {comments?.map((el) => (
           <div className="comment" key={Math.random()}>
             <div
               className="comment__photo"
               style={{
-                background: `url(${SERVER_URL}/${el.User.image}) center no-repeat`,
+                background: `url(${SERVER_URL}/${el.user.image}) center no-repeat`,
               }}
             ></div>
             <div className="comment__container">
               <div className="comment__container--top">
-                <div className="comment__user">
-                  {el.User.name}
-                </div>
+                <div className="comment__user">{el.user.name}</div>
                 <div className="comment__time">{getDate(el.date)}</div>
               </div>
               <div className="comment__text">{el.text}</div>

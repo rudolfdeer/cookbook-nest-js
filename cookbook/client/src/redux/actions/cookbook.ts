@@ -34,16 +34,16 @@ class CookbookActions {
 
   getCreatedCookbooks(cookbooks: ICookbook[]) {
     return {
-      type: ACTION_TYPES.COOKBOOKS_GET_USERS_CREATED,
+      type: ACTION_TYPES.COOKBOOKS_GET_userS_CREATED,
       payload: {
         cookbooks,
       },
     };
   }
 
-  getUsersSaved(user: IUser) {
+  getusersSaved(user: IUser) {
     return {
-      type: ACTION_TYPES.COOKBOOKS_GET_USERS_SAVED,
+      type: ACTION_TYPES.COOKBOOKS_GET_userS_SAVED,
       payload: {
         user,
       },
@@ -98,9 +98,9 @@ class CookbookActions {
     };
   }
 
-  hideUsers(cookbooks: ICookbook[], userId: number) {
+  hideusers(cookbooks: ICookbook[], userId: number) {
     return {
-      type: ACTION_TYPES.COOKBOOKS_HIDE_USERS_CREATED,
+      type: ACTION_TYPES.COOKBOOKS_HIDE_userS_CREATED,
       payload: {
         cookbooks,
         userId,

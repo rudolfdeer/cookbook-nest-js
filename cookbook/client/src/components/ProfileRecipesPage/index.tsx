@@ -14,12 +14,9 @@ import SERVER_URL from '../../constants/serverUrl';
 
 type ProfileRecipesPageProps = {
   recipes: IRecipe[];
-  getUsersCreatedRecipes: (userId: number) => void;
+  getusersCreatedRecipes: (userId: number) => void;
   user: IUser;
-  createRecipe: (
-    data: FormData,
-    userId: number,
-  ) => Promise<void>;
+  createRecipe: (data: FormData, userId: number) => Promise<void>;
   modifyRecipe: (
     recipeId: number,
     data: IRecipeRequestBody,
@@ -34,7 +31,7 @@ type ProfileRecipesPageProps = {
 };
 
 export default function ProfileRecipesPage(
-  props: ProfileRecipesPageProps,
+  props: ProfileRecipesPageProps
 ): JSX.Element {
   if (!props.user) {
     return <Redirect to={ROUTES.NOT_FOUND} />;
@@ -43,7 +40,7 @@ export default function ProfileRecipesPage(
   const {
     recipes,
     user,
-    getUsersCreatedRecipes,
+    getusersCreatedRecipes,
     createRecipe,
     modifyRecipe,
     updateRecipesImage,
@@ -57,10 +54,12 @@ export default function ProfileRecipesPage(
   const { name, bio, id } = user;
 
   useEffect(() => {
-    getUsersCreatedRecipes(user.id);
+    getusersCreatedRecipes(user.id);
   }, []);
 
-  const photoSrc = user ? `${SERVER_URL}/${user.image}` : '../../assets/images/photo-mask.png';
+  const photoSrc = user
+    ? `${SERVER_URL}/${user.image}`
+    : '../../assets/images/photo-mask.png';
 
   return (
     <>
@@ -73,7 +72,7 @@ export default function ProfileRecipesPage(
             <div className="profile-page--recipes__photo">
               <img
                 src={photoSrc}
-                alt="User photo default"
+                alt="user photo default"
                 className="profile-page--recipes__photo__image"
               />
             </div>
@@ -86,9 +85,6 @@ export default function ProfileRecipesPage(
             <ul className="profile-page--recipes__nav__list">
               <li className="list__item">
                 <Link to={ROUTES.PROFILE_SAVED}>{t('SAVED')}</Link>
-              </li>
-              <li className="list__item">
-                <Link to={ROUTES.PROFILE_COOKBOOKS}>{t('MY_COOKBOOKS')}</Link>
               </li>
               <li className="list__item--selected">{t('MY_RECIPES')}</li>
               <li className="list__item">
@@ -107,34 +103,34 @@ export default function ProfileRecipesPage(
               <ProfileRecipeCard
                 id={el.id}
                 title={el.title}
-                author={el.User}
+                author={el.user}
                 views={el.views}
-                comments={el.Recipe_Comments?.length}
+                comments={el.comments?.length}
                 image={el.image}
                 description={el.description}
                 key={el.id}
                 setModifyPopUpVisible={setModifyPopUpVisible}
                 setSelectedRecipeId={setSelectedRecipeId}
                 deleteRecipe={deleteRecipe}
-                loggedInUserId={id}
-                likes={el.Recipe_Likes}
+                loggedInuserId={id}
+                likes={el.likes}
               />
             ))}
           </section>
           {isCreatePopUpVisible ? (
             <PopUpCreateRecipe
-              loggedInUserId={id}
+              loggedInuserId={id}
               setCreatePopUpVisible={setCreatePopUpVisible}
               createRecipe={createRecipe}
             />
           ) : null}
           {isModifyPopUpVisible ? (
             <PopUpModifyRecipe
-              loggedInUserId={id}
+              loggedInuserId={id}
               setModifyPopUpVisible={setModifyPopUpVisible}
               selectedRecipe={recipes.find((el) => el.id === selectedRecipeId)}
               modifyRecipe={modifyRecipe}
-              updateRecipesImage = {updateRecipesImage}
+              updateRecipesImage={updateRecipesImage}
             />
           ) : null}
         </div>

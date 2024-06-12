@@ -17,7 +17,7 @@ type CardCookbookProps = {
   likes: ICookbookLike[];
   image: string;
   comments: ICookbookComment[];
-  loggedInUserId: number;
+  loggedInuserId: number;
   setSelectedCookbookId: Dispatch<SetStateAction<number>>;
   setPopUpCookbookVisible: Dispatch<SetStateAction<boolean>>;
 };
@@ -35,11 +35,11 @@ export default function CardCookbook(props: CardCookbookProps): JSX.Element {
     comments,
     setSelectedCookbookId,
     setPopUpCookbookVisible,
-    loggedInUserId,
+    loggedInuserId,
   } = props;
 
-  const likeUserIds = likes.map((el) => el.UserId);
-  const commentedUsersIds = comments.map((el) => el.UserId);
+  const likeuserIds = likes.map((el) => el.userId);
+  const commentedusersIds = comments.map((el) => el.userId);
 
   return (
     <div className="card">
@@ -76,15 +76,15 @@ export default function CardCookbook(props: CardCookbookProps): JSX.Element {
       <div className="card__info-container--bottom">
         <div className="card__statistics-item">
           <LikesIcon
-            likeUserIds={likeUserIds}
-            loggedInUserId={loggedInUserId}
+            likeuserIds={likeuserIds}
+            loggedInuserId={loggedInuserId}
           />
           {likes.length} {t('LIKES')}
         </div>
         <div className="card__statistics-item">
           <CommentsIcon
-            commentedUsersIds={commentedUsersIds}
-            loggedInUserId={loggedInUserId}
+            commentedusersIds={commentedusersIds}
+            loggedInuserId={loggedInuserId}
           />
           {comments.length} {t('COMMENTS')}
         </div>

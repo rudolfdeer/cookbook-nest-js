@@ -17,17 +17,16 @@ type RecipeCardRatedProps = {
   likes: IRecipeLike[];
   image: string;
   comments: IRecipeComment[];
-  loggedInUserId: number;
+  loggedInuserId: number;
 };
 
 export default function CardRated(props: RecipeCardRatedProps): JSX.Element {
-  const {
-    id, views, image, title, author, likes, comments, loggedInUserId,
-  } = props;
+  const { id, views, image, title, author, likes, comments, loggedInuserId } =
+    props;
   const { t } = useTranslation();
 
-  const likeUserIds = likes.map((el) => el.UserId);
-  const commentedUsersIds = comments.map((el) => el.UserId);
+  const likeuserIds = likes.map((el) => el.userId);
+  const commentedusersIds = comments.map((el) => el.userId);
 
   return (
     <div className="card">
@@ -38,13 +37,8 @@ export default function CardRated(props: RecipeCardRatedProps): JSX.Element {
         </div>
         <DotsIcon />
       </div>
-      <div
-        className="card__image"
-      >
-        <img
-          src={`${SERVER_URL}/${image}`}
-          alt="Recipe image"
-        />
+      <div className="card__image">
+        <img src={`${SERVER_URL}/${image}`} alt="Recipe image" />
       </div>
       <div className="card__info-container--middle">
         <div className="card__title">{title}</div>
@@ -52,11 +46,18 @@ export default function CardRated(props: RecipeCardRatedProps): JSX.Element {
       </div>
       <div className="card__info-container--bottom">
         <div className="card__statistics-item">
-          <LikesIcon likeUserIds = {likeUserIds} loggedInUserId={loggedInUserId} id = {id}/>
+          <LikesIcon
+            likeuserIds={likeuserIds}
+            loggedInuserId={loggedInuserId}
+            id={id}
+          />
           {likes.length} {t('LIKES')}
         </div>
         <div className="card__statistics-item">
-          <CommentsIcon commentedUsersIds={commentedUsersIds} loggedInUserId={loggedInUserId}/>
+          <CommentsIcon
+            commentedusersIds={commentedusersIds}
+            loggedInuserId={loggedInuserId}
+          />
           {comments.length} {t('COMMENTS')}
         </div>
       </div>

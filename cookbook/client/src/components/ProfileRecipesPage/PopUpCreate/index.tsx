@@ -6,12 +6,9 @@ import { IRecipeRequestBody } from '../../../interfaces';
 import './index.scss';
 
 type PopUpCreateRecipeProps = {
-  loggedInUserId: number;
+  loggedInuserId: number;
   setCreatePopUpVisible: Dispatch<SetStateAction<boolean>>;
-  createRecipe: (
-    data: FormData,
-    userId: number,
-  ) => Promise<void>;
+  createRecipe: (data: FormData, userId: number) => Promise<void>;
 };
 
 const formData = {
@@ -25,9 +22,9 @@ const formData = {
 const required = (value: string | string[]) => (value ? undefined : 'Required');
 
 export default function PopUpCreateRecipe(
-  props: PopUpCreateRecipeProps,
+  props: PopUpCreateRecipeProps
 ): JSX.Element {
-  const { setCreatePopUpVisible, createRecipe, loggedInUserId } = props;
+  const { setCreatePopUpVisible, createRecipe, loggedInuserId } = props;
 
   const { t } = useTranslation();
   const [photoSrc, setPhotoSrc] = useState('');
@@ -42,7 +39,7 @@ export default function PopUpCreateRecipe(
     data.append('time', values.time.toString());
     data.append('image', photoFile);
 
-    createRecipe(data, loggedInUserId);
+    createRecipe(data, loggedInuserId);
     setCreatePopUpVisible(false);
   };
 
@@ -80,9 +77,9 @@ export default function PopUpCreateRecipe(
                           className="pop-up--create__section__input--error"
                           placeholder="Title"
                         />
-                          <span className="pop-up--create__section__input__error">
-                            {meta.error && meta.touched ? meta.error : null}
-                          </span>
+                        <span className="pop-up--create__section__input__error">
+                          {meta.error && meta.touched ? meta.error : null}
+                        </span>
                       </>
                     )}
                   </Field>
@@ -93,22 +90,22 @@ export default function PopUpCreateRecipe(
                     <Field name="image">
                       {({ input }) => (
                         <input
-                        {...input}
-                      name="image"
-                      type="file"
-                      className="pop-up--create__section__input--file"
-                      onChange={(e: React.ChangeEvent) => {
-                        const target = e.target as HTMLInputElement;
-                        const file = target.files[0];
-                        setPhotoFile(file);
-                        const reader = new FileReader();
-                        reader.onload = () => {
-                          const result = String(reader.result);
-                          setPhotoSrc(result);
-                        };
-                        reader.readAsDataURL(file);
-                      }}
-                    />
+                          {...input}
+                          name="image"
+                          type="file"
+                          className="pop-up--create__section__input--file"
+                          onChange={(e: React.ChangeEvent) => {
+                            const target = e.target as HTMLInputElement;
+                            const file = target.files[0];
+                            setPhotoFile(file);
+                            const reader = new FileReader();
+                            reader.onload = () => {
+                              const result = String(reader.result);
+                              setPhotoSrc(result);
+                            };
+                            reader.readAsDataURL(file);
+                          }}
+                        />
                       )}
                     </Field>
                   </label>

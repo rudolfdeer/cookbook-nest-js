@@ -1,10 +1,10 @@
 import Colors from '../constants/colors';
 
-const getDefaultColor = (loggedInUserId: number, userIds: number[]): string => {
-  if (!loggedInUserId || !userIds) {
+const getDefaultColor = (loggedInuserId: number, userIds: number[]): string => {
+  if (!loggedInuserId || !userIds) {
     return Colors.Grey;
   }
-  const index = userIds.indexOf(loggedInUserId);
+  const index = userIds.indexOf(loggedInuserId);
   if (index > -1) {
     return Colors.Yellow;
   }

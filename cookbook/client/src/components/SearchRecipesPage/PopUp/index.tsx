@@ -13,23 +13,20 @@ import SERVER_URL from '../../../constants/serverUrl';
 type PopUpRecipeDetailedProps = {
   setVisible: Dispatch<SetStateAction<boolean>>;
   recipe: IRecipe;
-  loggedInUserId: number;
-  saveToUsersRecipes: (recipeId: number) => Promise<void>;
-  createComment: (
-    recipeId: number,
-    text: string
-  ) => Promise<void>;
+  loggedInuserId: number;
+  saveTousersRecipes: (recipeId: number) => Promise<void>;
+  createComment: (recipeId: number, text: string) => Promise<void>;
 };
 
 export default function PopUpRecipeDetailed(
-  props: PopUpRecipeDetailedProps,
+  props: PopUpRecipeDetailedProps
 ): JSX.Element {
   const { t } = useTranslation();
   const {
     setVisible,
     recipe,
-    saveToUsersRecipes,
-    loggedInUserId,
+    saveTousersRecipes,
+    loggedInuserId,
     createComment,
   } = props;
   const {
@@ -37,9 +34,9 @@ export default function PopUpRecipeDetailed(
     image,
     description,
     title,
-    User,
-    Recipe_Likes,
-    Recipe_Comments,
+    user,
+    likes,
+    comments,
     directions,
     ingredients,
   } = recipe;
@@ -51,8 +48,8 @@ export default function PopUpRecipeDetailed(
     }
   };
 
-  const likeUserIds = Recipe_Likes.map((el) => el.UserId);
-  const commentedUsersIds = Recipe_Comments.map((el) => el.UserId);
+  const likeuserIds = likes.map((el) => el.userId);
+  const commentedusersIds = comments.map((el) => el.userId);
 
   return (
     <div className="overlay" onClick={(e) => closePopUp(e)}>
@@ -65,11 +62,11 @@ export default function PopUpRecipeDetailed(
             <div className="pop-up--recipe__sections">
               <div className="pop-up--recipe__section--top">
                 <div className="pop-up--recipe__title">{title}</div>
-                {loggedInUserId && loggedInUserId !== User.id ? (
+                {loggedInuserId && loggedInuserId !== user.id ? (
                   <button
                     className="pop-up--recipe__btn"
                     onClick={() => {
-                      saveToUsersRecipes(id);
+                      saveTousersRecipes(id);
                       setVisible(false);
                     }}
                   >
@@ -78,8 +75,8 @@ export default function PopUpRecipeDetailed(
                 ) : null}
               </div>
               <div className="pop-up--recipe__author">
-                <Link to={`${ROUTES.PROFILE_USER}/${User.id}`}>
-                  {User.name}
+                <Link to={`${ROUTES.PROFILE_user}/${user.id}`}>
+                  {user.name}
                 </Link>
               </div>
               <div className="pop-up--recipe__section--description">
@@ -117,23 +114,30 @@ export default function PopUpRecipeDetailed(
               </div>
               <div className="pop-up--recipe__section--statistics">
                 <div className="card__statistics-item likes">
-                  <LikesIcon id = {id} loggedInUserId={loggedInUserId} likeUserIds={likeUserIds}/>
-                  {Recipe_Likes.length} <span>&nbsp;{t('LIKES')}</span>
+                  <LikesIcon
+                    id={id}
+                    loggedInuserId={loggedInuserId}
+                    likeuserIds={likeuserIds}
+                  />
+                  {likes.length} <span>&nbsp;{t('LIKES')}</span>
                 </div>
                 <div className="card__statistics-item comments">
-                  <CommentsIcon commentedUsersIds={commentedUsersIds} loggedInUserId={loggedInUserId}/>
-                  {Recipe_Comments.length} <span>&nbsp;{t('COMMENTS')}</span>
+                  <CommentsIcon
+                    commentedusersIds={commentedusersIds}
+                    loggedInuserId={loggedInuserId}
+                  />
+                  {comments.length} <span>&nbsp;{t('COMMENTS')}</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="pop-up--recipe__section--comments">
             <div className="pop-up--recipe__section--comments__title">{`${t(
-              'COMMENTS_SECTION',
-            )} (${Recipe_Comments.length})`}</div>
+              'COMMENTS_SECTION'
+            )} (${comments.length})`}</div>
             <CommentsSection
-              comments={Recipe_Comments}
-              loggedInUserId={loggedInUserId}
+              comments={comments}
+              loggedInuserId={loggedInuserId}
               recipeId={id}
               createComment={createComment}
             />

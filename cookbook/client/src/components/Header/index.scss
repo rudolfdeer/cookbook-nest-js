@@ -20,12 +20,6 @@
       @include nav-list;
 
       justify-content: space-between;
-
-      &__item {
-        &:first-child {
-          margin-right: 72px;
-        }
-      }
     }
   }
 

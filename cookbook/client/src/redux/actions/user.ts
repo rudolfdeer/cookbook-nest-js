@@ -1,10 +1,10 @@
 import ACTION_TYPES from '../../constants/actionTypes';
 import { IUser } from '../../interfaces';
 
-class UserActions {
+class userActions {
   signIn(user: IUser) {
     return {
-      type: ACTION_TYPES.USER_SIGN_IN,
+      type: ACTION_TYPES.user_SIGN_IN,
       payload: {
         user,
       },
@@ -13,7 +13,7 @@ class UserActions {
 
   signUp(user: IUser) {
     return {
-      type: ACTION_TYPES.USER_SIGN_UP,
+      type: ACTION_TYPES.user_SIGN_UP,
       payload: {
         user,
       },
@@ -22,19 +22,19 @@ class UserActions {
 
   signOut() {
     return {
-      type: ACTION_TYPES.USER_SIGN_OUT,
+      type: ACTION_TYPES.user_SIGN_OUT,
     };
   }
 
   delete() {
     return {
-      type: ACTION_TYPES.USER_DELETE,
+      type: ACTION_TYPES.user_DELETE,
     };
   }
 
   update(user: IUser) {
     return {
-      type: ACTION_TYPES.USER_UPDATE,
+      type: ACTION_TYPES.user_UPDATE,
       payload: {
         user,
       },
@@ -43,7 +43,7 @@ class UserActions {
 
   updatePhoto(user: IUser) {
     return {
-      type: ACTION_TYPES.USER_UPDATE_PHOTO,
+      type: ACTION_TYPES.user_UPDATE_PHOTO,
       payload: {
         user,
       },
@@ -51,4 +51,4 @@ class UserActions {
   }
 }
 
-export default new UserActions();
+export default new userActions();
