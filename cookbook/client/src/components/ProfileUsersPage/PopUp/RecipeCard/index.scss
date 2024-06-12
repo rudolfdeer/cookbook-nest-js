@@ -1,0 +1,112 @@
+@import '../../../../styles/index.scss';
+
+.pop-up--users-cookbook__section--recipes__cards {
+  .card {
+    margin-bottom: 24px;
+    padding: 24px;
+    display: flex;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    height: 212px;
+
+    flex-wrap: nowrap;
+    position: relative;
+    border-radius: 50px 10px 10px 10px;
+
+    &__statistics-item {
+      margin-right: 24px;
+      line-height: 19px;
+
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &__icon {
+        margin-right: 8px;
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    &__image {
+      border-radius: 50px 10px;
+      margin-right: 24px;
+      width: 288px;
+      height: 212px;
+      background-size: 100% !important;
+      flex-basis: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &__info-container {
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+
+      &--bottom {
+        margin-bottom: 0;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+
+      &--description {
+        margin-bottom: 16px;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        max-height: 70px;
+        overflow: hidden;
+      }
+    }
+
+    &__title {
+      @include title-20;
+    }
+
+    &:hover {
+      box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.24);
+
+      .card__title {
+        color: $primary-yellow;
+
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &__content {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-left: 288px;
+      width: 100%;
+    }
+
+    &__statistics {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+
+    &__description {
+      max-height: 70px;
+      overflow: hidden;
+    }
+  }
+}

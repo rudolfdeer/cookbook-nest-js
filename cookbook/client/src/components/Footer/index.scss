@@ -1,0 +1,132 @@
+@import '../../styles/index.scss';
+
+.footer {
+  background-color: $main;
+
+  a {
+    color: $white;
+  }
+
+  .wrapper {
+    padding: 10px;
+  }
+
+  &__nav {
+    &__list {
+      @include nav-list;
+
+      &__item {
+        margin-right: 72px;
+        color: $white;
+
+        a {
+          color: $white;
+        }
+
+        &:hover {
+          a {
+            color: $primary-yellow;
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 97px;
+    font-size: 16px;
+    background: $main;
+  }
+
+  &__logo {
+    width: 112px;
+    height: 33px;
+    background: url('../../assets/images/logo-black.png') center no-repeat;
+  }
+
+  &__email {
+    a {
+      color: $primary-yellow;
+    }
+  }
+
+  &__study {
+    display: flex;
+    flex-wrap: nowrap;
+
+    &__project {
+      color: $white-dirty;
+      margin-right: 18px;
+    }
+  }
+
+  &__lang {
+    &__btn {
+      background: none;
+      color: $white;
+      border: none;
+
+      &:first-child {
+        border-right: 1px solid $white-dirty;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .footer {
+    &__container {
+      flex-direction: column;
+      align-items: center;
+
+      a {
+        margin-bottom: 24px;
+      }
+    }
+
+    &__email {
+      margin-bottom: 24px;
+    }
+
+    &__nav {
+      width: 100%;
+      margin-bottom: 24px;
+
+      &__list {
+        justify-content: center;
+    
+      }
+    }
+
+    &__study {
+      margin-bottom: 24px;
+
+     
+    }
+
+    &__lang {
+      &__btn {
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}
+
